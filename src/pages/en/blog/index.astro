@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import PostList from '../../../components/PostList.astro';
+import { SITE_URL } from '../../../config';
+
+const posts = (
+	await getCollection('blog', (e) => e.data.lang === 'en' && (import.meta.env.PROD ? !e.data.draft : true))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Base
+	title="Blog — Immigration law articles & guides | Humana Legal"
+	description="Clear guidance on immigration and human rights law in Chile: residency, family reunification, deportation, asylum and more."
+	canonical={`${SITE_URL}/en/blog/`}
+	alternateEs={`${SITE_URL}/blog/`}
+	alternateEn={`${SITE_URL}/en/blog/`}
+	langSwitchHref="/blog/"
+>
+	<section class="section blog-index">
+		<div class="container">
+			<span class="section__label">Blog</span>
+			<h1 class="section__title">Articles and guides, <em>in plain language.</em></h1>
+			<p class="blog-index__intro">
+				Guidance on immigration and human rights law in Chile. General information to help you
+				understand your rights and the steps ahead.
+			</p>
+			<PostList posts={posts} lang="en" />
+		</div>
+	</section>
+</Base>
+
+<style>
+	.blog-index__intro {
+		max-width: 56ch;
+		color: var(--ink-2);
+		margin-bottom: 3rem;
+	}
+</style>

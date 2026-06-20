@@ -1,0 +1,44 @@
+---
+import { content, getLocale } from '../i18n/content';
+
+const locale = getLocale(Astro.currentLocale);
+const { profile } = content[locale];
+---
+
+<section class="profile section" id={profile.id}>
+	<div class="container profile__grid">
+		<div class="profile__media">
+			<div class="profile__photo">
+				<img
+					src="/assets/images/tamara.jpg"
+					alt={profile.photoAlt}
+					loading="lazy"
+					width="600"
+					height="750"
+				/>
+			</div>
+			<div class="profile__caption">
+				<span class="profile__name">{profile.name}</span>
+				<span class="profile__role">{profile.role}</span>
+			</div>
+		</div>
+
+		<div class="profile__body">
+			<span class="section__label">{profile.label}</span>
+			<h2 class="section__title" set:html={profile.titleHtml} />
+
+			{profile.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+
+			<dl class="profile__facts">
+				{
+					profile.facts.map((fact) => (
+						<div>
+							<dt>{fact.dt}</dt>
+							<dd>{fact.dd}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</div>
+	</div>
+</section>

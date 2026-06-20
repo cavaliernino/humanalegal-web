@@ -1,0 +1,58 @@
+---
+import { content, getLocale } from '../i18n/content';
+
+const locale = getLocale(Astro.currentLocale);
+const { nav } = content[locale];
+const homeHref = locale === 'es' ? '/' : '/en/';
+
+interface Props {
+	langSwitchHref?: string;
+}
+const langSwitchHref = Astro.props.langSwitchHref ?? nav.langSwitch.href;
+
+// Fuera de la home, los enlaces de ancla (#areas) deben apuntar a la home.
+const pathname = Astro.url.pathname;
+const isHome = pathname === homeHref || pathname === homeHref.replace(/\/$/, '');
+const hashBase = isHome ? '' : homeHref;
+const resolve = (href: string) => (href.startsWith('#') ? `${hashBase}${href}` : href);
+---
+
+<header class="nav" id="nav">
+	<div class="container nav__inner">
+		<a href={homeHref} class="nav__brand" aria-label={nav.brandAria}>
+			<span class="nav__wordmark">humana <em>legal</em></span>
+			<span class="nav__sub">{nav.sub}</span>
+		</a>
+
+		<nav class="nav__menu" aria-label={nav.menuAria}>
+			{nav.links.map((link) => <a href={resolve(link.href)}>{link.label}</a>)}
+		</nav>
+
+		<div class="nav__actions">
+			<a
+				href={langSwitchHref}
+				class="nav__lang"
+				aria-label={nav.langSwitch.aria}
+				hreflang={nav.langSwitch.hreflang}
+			>
+				{nav.langSwitch.code}
+			</a>
+			<a href={resolve(nav.cta.href)} class="btn btn--primary btn--sm">{nav.cta.label}</a>
+			<button
+				class="nav__toggle"
+				aria-label={nav.toggleAria}
+				aria-expanded="false"
+				aria-controls="mobile-menu"
+			>
+				<span></span><span></span><span></span>
+			</button>
+		</div>
+	</div>
+
+	<div class="nav__mobile" id="mobile-menu" hidden>
+		{nav.mobileLinks.map((link) => <a href={resolve(link.href)}>{link.label}</a>)}
+		<a href={langSwitchHref} hreflang={nav.mobileLangSwitch.hreflang}>
+			{nav.mobileLangSwitch.label}
+		</a>
+	</div>
+</header>

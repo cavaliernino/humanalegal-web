@@ -1,0 +1,122 @@
+# Configuración de Sveltia CMS (compatible con Decap CMS).
+# Editor en https://www.humanalegal.cl/admin/
+#
+# COMPLETAR antes de usar (ver deploy/ADMIN-SETUP.md):
+#   - backend.repo  : "usuario-u-org/nombre-del-repo" en GitHub
+#   - backend.base_url : URL del Worker de Cloudflare (sveltia-cms-auth)
+#
+# No hay secretos aquí: el repo y la URL del Worker son públicos; el client
+# secret de OAuth vive en el Worker, nunca en este archivo.
+
+backend:
+  name: github
+  repo: TU_USUARIO/humanalegal-web # <-- COMPLETAR
+  branch: main
+  base_url: https://TU-WORKER.workers.dev # <-- COMPLETAR (Cloudflare Worker)
+
+# Las imágenes que suba Tamara van al repo y se sirven desde el sitio.
+media_folder: public/assets/images/blog
+public_folder: /assets/images/blog
+
+# Mensajes de commit en español, legibles en el historial.
+backend_commit_messages:
+  create: 'Artículo nuevo: {{slug}}'
+  update: 'Edita artículo: {{slug}}'
+  delete: 'Elimina artículo: {{slug}}'
+  uploadMedia: 'Sube imagen: {{path}}'
+  deleteMedia: 'Elimina imagen: {{path}}'
+
+collections:
+  - name: blog_es
+    label: 'Blog · Español'
+    label_singular: 'Artículo (ES)'
+    folder: src/content/blog/es
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: 'Descripción (resumen para Google y redes)', name: description, widget: text }
+      - {
+          label: 'Fecha de publicación',
+          name: pubDate,
+          widget: datetime,
+          format: 'YYYY-MM-DD',
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+        }
+      - {
+          label: 'Fecha de actualización',
+          name: updatedDate,
+          widget: datetime,
+          required: false,
+          format: 'YYYY-MM-DD',
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+        }
+      - { label: Idioma, name: lang, widget: hidden, default: es }
+      - { label: Etiquetas, name: tags, widget: list, required: false }
+      - {
+          label: 'Clave de traducción',
+          name: translationKey,
+          widget: string,
+          required: false,
+          hint: 'Usa el MISMO valor en el artículo en inglés para enlazarlos (botón ES/EN).',
+        }
+      - {
+          label: 'Borrador (no se publica)',
+          name: draft,
+          widget: boolean,
+          default: true,
+          hint: 'Mientras esté activado, el artículo NO aparece en el sitio.',
+        }
+      - { label: Autora, name: author, widget: string, default: 'Tamara López González', required: false }
+      - { label: Contenido, name: body, widget: markdown }
+
+  - name: blog_en
+    label: 'Blog · English'
+    label_singular: 'Article (EN)'
+    folder: src/content/blog/en
+    create: true
+    slug: '{{slug}}'
+    extension: md
+    format: yaml-frontmatter
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: 'Description (Google & social summary)', name: description, widget: text }
+      - {
+          label: 'Publish date',
+          name: pubDate,
+          widget: datetime,
+          format: 'YYYY-MM-DD',
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+        }
+      - {
+          label: 'Updated date',
+          name: updatedDate,
+          widget: datetime,
+          required: false,
+          format: 'YYYY-MM-DD',
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+        }
+      - { label: Language, name: lang, widget: hidden, default: en }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - {
+          label: 'Translation key',
+          name: translationKey,
+          widget: string,
+          required: false,
+          hint: 'Use the SAME value as the Spanish article to link them (ES/EN switch).',
+        }
+      - {
+          label: 'Draft (not published)',
+          name: draft,
+          widget: boolean,
+          default: true,
+          hint: 'While enabled, the article does NOT appear on the site.',
+        }
+      - { label: Author, name: author, widget: string, default: 'Tamara López González', required: false }
+      - { label: Body, name: body, widget: markdown }

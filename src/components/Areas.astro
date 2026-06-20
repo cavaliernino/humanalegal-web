@@ -1,0 +1,32 @@
+---
+import { content, getLocale } from '../i18n/content';
+
+const locale = getLocale(Astro.currentLocale);
+const { areas } = content[locale];
+---
+
+<section class="areas section" id={areas.id}>
+	<div class="container">
+		<div class="section__head">
+			<span class="section__label">{areas.label}</span>
+			<h2 class="section__title" set:html={areas.titleHtml} />
+		</div>
+
+		<div class="areas__grid">
+			{
+				areas.items.map((area) => (
+					<article class="area">
+						<div class="area__num">{area.num}</div>
+						<h3 class="area__title">{area.title}</h3>
+						<p class="area__desc">{area.desc}</p>
+						<ul class="area__list">
+							{area.list.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

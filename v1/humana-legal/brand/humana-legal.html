@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Humana Legal — Exploración de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #141414;
+    --ink-2: #2a2a2a;
+    --ink-soft: #4a4a4a;
+    --bone: #f4efe6;
+    --bone-2: #ebe4d5;
+    --bone-warm: #e8dfcc;
+    --cream: #fdf9f0;
+    --clay: #7a2f2f;
+    --clay-deep: #5f1f1f;
+    --clay-light: #a84848;
+    --sage: #5a6b52;
+    --line: rgba(20, 20, 20, 0.14);
+    --line-light: rgba(20, 20, 20, 0.06);
+    --display: "Fraunces", Georgia, serif;
+    --sans: "Manrope", system-ui, sans-serif;
+    --mono: "Instrument Sans", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--bone);
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem); }
+
+  /* Header */
+  .intro { padding-bottom: clamp(3rem, 6vw, 5rem); border-bottom: 1px solid var(--line); margin-bottom: clamp(3rem, 6vw, 5rem); }
+  .intro__kicker { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.25em; color: var(--clay); margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.75rem; }
+  .intro__kicker::before { content: ""; width: 1.8rem; height: 1px; background: currentColor; }
+  .intro__title { font-family: var(--display); font-size: clamp(3rem, 8vw, 6.5rem); line-height: 0.95; font-weight: 400; letter-spacing: -0.035em; margin-bottom: 1.5rem; font-optical-sizing: auto; }
+  .intro__title em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .intro__lede { font-size: 1.15rem; max-width: 60ch; color: var(--ink-2); line-height: 1.55; }
+
+  /* Sections */
+  .block { padding: clamp(3rem, 6vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+  .block:last-child { border-bottom: none; }
+  .block__label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink-soft); margin-bottom: 1.5rem; }
+  .block__title { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; letter-spacing: -0.015em; margin-bottom: 2rem; line-height: 1.15; }
+  .block__title em { font-style: italic; color: var(--clay); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* Logo lockup */
+  .logo-box { aspect-ratio: 4 / 3; background: var(--cream); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 2rem; border-radius: 2px; }
+  .logo-box--dark { background: var(--ink); border-color: var(--ink); }
+  .logo-wordmark { font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -0.025em; color: var(--ink); text-align: center; }
+  .logo-wordmark em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .logo-wordmark--light { color: var(--bone); }
+  .logo-wordmark--light em { color: var(--clay-light); }
+  .logo-wordmark small { display: block; font-family: var(--sans); font-size: 0.6em; font-weight: 500; letter-spacing: 0.3em; margin-top: 0.5em; text-transform: uppercase; opacity: 0.6; }
+
+  .mono-box { aspect-ratio: 1 / 1; background: var(--cream); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; padding: 2rem; border-radius: 2px; position: relative; overflow: hidden; }
+  .mono-box--dark { background: var(--ink); border-color: var(--ink); }
+  .mono-box--clay { background: var(--clay); border-color: var(--clay); }
+  .mono-svg { width: 60%; height: auto; }
+
+  .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+
+  .asset-caption { display: flex; justify-content: space-between; align-items: baseline; padding: 0.75rem 0 0; font-size: 0.75rem; color: var(--ink-soft); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; border-top: 1px solid var(--line-light); margin-top: 0.75rem; }
+
+  /* Palette */
+  .palette { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 900px) { .palette { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 500px) { .palette { grid-template-columns: repeat(2, 1fr); } }
+  .swatch { aspect-ratio: 3 / 4; border-radius: 2px; padding: 0.85rem; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--line-light); font-size: 0.7rem; }
+  .swatch__name { font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; }
+  .swatch__hex { font-family: var(--mono); letter-spacing: 0.02em; opacity: 0.85; }
+
+  /* Typography specimens */
+  .specimen { padding: 1.75rem; background: var(--cream); border: 1px solid var(--line); border-radius: 2px; margin-bottom: 1rem; }
+  .specimen__meta { font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600; margin-bottom: 1rem; }
+  .specimen__sample-display { font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1; font-weight: 400; letter-spacing: -0.02em; }
+  .specimen__sample-display em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .specimen__sample-body { font-family: var(--sans); font-size: 1rem; color: var(--ink-2); line-height: 1.65; max-width: 60ch; }
+  .specimen__row { display: flex; gap: 1.5rem; align-items: baseline; font-family: var(--display); margin: 0.3rem 0; flex-wrap: wrap; }
+  .specimen__row small { font-family: var(--sans); font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.18em; font-weight: 600; min-width: 80px; }
+
+  /* Taglines */
+  .taglines { list-style: none; display: grid; gap: 0.5rem; }
+  .taglines li { font-family: var(--display); font-size: clamp(1.3rem, 2.5vw, 1.9rem); padding: 1.25rem 0; border-bottom: 1px solid var(--line-light); letter-spacing: -0.015em; line-height: 1.2; font-weight: 400; }
+  .taglines li em { font-style: italic; color: var(--clay); }
+  .taglines li:last-child { border-bottom: none; }
+  .taglines small { display: block; font-family: var(--sans); font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.2em; font-weight: 600; margin-top: 0.4rem; }
+
+  /* Business card mockup */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    aspect-ratio: 1.75 / 1;
+    padding: 1.5rem;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 40px -20px rgba(20, 20, 20, 0.25);
+  }
+  .card--front { background: var(--cream); }
+  .card--back { background: var(--ink); color: var(--bone); border-color: var(--ink); }
+  .card__brand { font-family: var(--display); font-size: 1.25rem; letter-spacing: -0.02em; }
+  .card__brand em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .card__brand--back em { color: var(--clay-light); }
+  .card__name { font-family: var(--sans); font-weight: 600; font-size: 0.88rem; letter-spacing: 0.02em; }
+  .card__role { font-family: var(--sans); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--clay); margin-top: 0.2rem; font-weight: 500; }
+  .card__contact { font-family: var(--sans); font-size: 0.74rem; color: var(--ink-soft); line-height: 1.5; }
+  .card--back .card__brand { color: var(--bone); }
+  .card--back .card__tagline { font-family: var(--display); font-style: italic; font-size: 1.05rem; line-height: 1.3; color: var(--bone-2); max-width: 20ch; font-weight: 300; }
+
+  /* Site snippet */
+  .site-preview {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    margin-top: 1.5rem;
+  }
+  .site-preview__nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--line-light); font-size: 0.85rem; }
+  .site-preview__nav-brand { font-family: var(--display); font-size: 1.05rem; letter-spacing: -0.02em; }
+  .site-preview__nav-brand em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .site-preview__nav-links { display: flex; gap: 1.5rem; font-family: var(--sans); color: var(--ink-soft); }
+  .site-preview__hero { padding: clamp(2rem, 5vw, 4rem) 0 0; }
+  .site-preview__eyebrow { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.22em; color: var(--clay); font-weight: 600; margin-bottom: 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .site-preview__eyebrow::before { content: ""; width: 6px; height: 6px; background: var(--clay); border-radius: 50%; }
+  .site-preview__title { font-family: var(--display); font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.98; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  .site-preview__title em { font-style: italic; color: var(--clay); font-weight: 300; }
+  .site-preview__lede { font-size: 1.05rem; color: var(--ink-2); max-width: 50ch; margin-bottom: 2rem; line-height: 1.55; }
+  .site-preview__cta { display: inline-block; background: var(--ink); color: var(--bone); padding: 0.9rem 1.5rem; text-decoration: none; font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border-radius: 2px; }
+
+  /* Notes */
+  .notes { padding: 2rem; background: var(--bone-warm); border-radius: 2px; font-size: 0.95rem; line-height: 1.6; color: var(--ink-2); }
+  .notes strong { color: var(--ink); }
+  .notes p + p { margin-top: 0.75rem; }
+
+  .fill-ink { background: var(--ink); color: var(--bone); }
+  .fill-clay { background: var(--clay); color: var(--cream); }
+  .fill-sage { background: var(--sage); color: var(--cream); }
+  .fill-bone { background: var(--bone-warm); color: var(--ink); }
+  .fill-cream { background: var(--cream); color: var(--ink); }
+
+  footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); font-size: 0.78rem; color: var(--ink-soft); letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="intro">
+    <span class="intro__kicker">Exploración de marca · Abril 2026</span>
+    <h1 class="intro__title">Humana <em>Legal.</em></h1>
+    <p class="intro__lede">
+      Una propuesta de marca para el estudio de Tamara López G. que articula, en dos palabras,
+      la intersección entre derecho y humanidad: el derecho como práctica centrada en las personas,
+      no en los expedientes. Cercano pero técnico. Accesible sin ser liviano.
+    </p>
+  </section>
+
+  <!-- ===== Concepto ===== -->
+  <section class="block">
+    <div class="block__label">01 · Concepto</div>
+    <h2 class="block__title">Derecho <em>centrado en las personas.</em></h2>
+    <div class="grid-2">
+      <div>
+        <p style="font-size: 1.05rem; line-height: 1.65; color: var(--ink-2); margin-bottom: 1.25rem;">
+          "Humana" como adjetivo declara la forma de ejercer: con empatía, con lenguaje claro, con atención al contexto de quien consulta.
+          "Legal" como sustantivo aterriza el territorio: esto es derecho serio, no coaching ni filantropía.
+        </p>
+        <p style="font-size: 1.05rem; line-height: 1.65; color: var(--ink-2); margin-bottom: 1.25rem;">
+          La combinación funciona especialmente bien para las tres áreas de Tamara:
+        </p>
+        <ul style="padding-left: 1.25rem; color: var(--ink-2); line-height: 1.7;">
+          <li><strong style="color: var(--ink); font-weight: 600;">Migratorio</strong> — personas atravesando momentos vitales, no expedientes.</li>
+          <li><strong style="color: var(--ink); font-weight: 600;">Derechos Humanos</strong> — el vínculo con la marca es directo y legítimo.</li>
+          <li><strong style="color: var(--ink); font-weight: 600;">Administrativo</strong> — humaniza una práctica típicamente fría y técnica.</li>
+        </ul>
+      </div>
+      <div class="notes">
+        <p><strong>Diferenciación frente al mercado chileno.</strong> La mayoría de los estudios se llaman con apellidos ("López García", "Morales & Cía"), siglas, o términos neutros ("Estudio Jurídico", "Consultora Legal"). Pocos se atreven con una afirmación de valor explícita.</p>
+        <p><strong>Escalabilidad.</strong> Humana Legal puede crecer sin necesidad de sumar nombres al rótulo: un estudio, no una sociedad de apellidos. Cuando Tamara contrate, la marca sigue intacta.</p>
+        <p><strong>Internacional.</strong> "Humana Legal" funciona fonéticamente en español, inglés y portugués. Útil para derecho migratorio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Logo ===== -->
+  <section class="block">
+    <div class="block__label">02 · Sistema de logo</div>
+    <h2 class="block__title">Un wordmark editorial, <em>un monograma versátil.</em></h2>
+
+    <div class="grid-2">
+      <div>
+        <div class="logo-box">
+          <div class="logo-wordmark">
+            humana <em>legal</em>
+            <small>Abogada · Chile</small>
+          </div>
+        </div>
+        <div class="asset-caption"><span>Wordmark principal</span><span>Logotipo horizontal</span></div>
+      </div>
+      <div>
+        <div class="logo-box logo-box--dark">
+          <div class="logo-wordmark logo-wordmark--light">
+            humana <em>legal</em>
+            <small>Attorney at Law · Chile</small>
+          </div>
+        </div>
+        <div class="asset-caption"><span>Versión en negativo</span><span>Fondo oscuro</span></div>
+      </div>
+    </div>
+
+    <div class="variants">
+      <div>
+        <div class="mono-box">
+          <svg class="mono-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="62" font-family="Fraunces, serif" font-size="62" font-weight="400" fill="#141414" text-anchor="middle" letter-spacing="-4">h</text>
+            <text x="68" y="62" font-family="Fraunces, serif" font-size="62" font-style="italic" font-weight="300" fill="#7a2f2f" text-anchor="middle">l</text>
+          </svg>
+        </div>
+        <div class="asset-caption"><span>Monograma</span><span>hl</span></div>
+      </div>
+      <div>
+        <div class="mono-box mono-box--dark">
+          <svg class="mono-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="62" font-family="Fraunces, serif" font-size="62" font-weight="400" fill="#f4efe6" text-anchor="middle" letter-spacing="-4">h</text>
+            <text x="68" y="62" font-family="Fraunces, serif" font-size="62" font-style="italic" font-weight="300" fill="#a84848" text-anchor="middle">l</text>
+          </svg>
+        </div>
+        <div class="asset-caption"><span>Negativo</span><span>Para fondos oscuros</span></div>
+      </div>
+      <div>
+        <div class="mono-box mono-box--clay">
+          <svg class="mono-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <text x="50" y="62" font-family="Fraunces, serif" font-size="62" font-weight="400" fill="#fdf9f0" text-anchor="middle" letter-spacing="-4">h</text>
+            <text x="68" y="62" font-family="Fraunces, serif" font-size="62" font-style="italic" font-weight="300" fill="#fdf9f0" opacity="0.75" text-anchor="middle">l</text>
+          </svg>
+        </div>
+        <div class="asset-caption"><span>Favicon</span><span>Acento en arcilla</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Paleta ===== -->
+  <section class="block">
+    <div class="block__label">03 · Paleta</div>
+    <h2 class="block__title">Cálida, seria, <em>humana.</em></h2>
+    <p style="color: var(--ink-2); max-width: 58ch; margin-bottom: 0.5rem;">
+      La paleta original (grafito + borgoña + hueso) se mantiene, pero con matices más cálidos
+      para reforzar el lado "humano". El borgoña se traslada hacia un rojo arcilla (menos corporativo,
+      más artesanal) y se introduce un verde salvia como color secundario opcional, evocador de
+      confianza y estabilidad.
+    </p>
+
+    <div class="palette">
+      <div class="swatch fill-ink">
+        <div><div class="swatch__name">Tinta</div></div>
+        <div class="swatch__hex">#141414</div>
+      </div>
+      <div class="swatch fill-clay">
+        <div><div class="swatch__name">Arcilla</div></div>
+        <div class="swatch__hex">#7A2F2F</div>
+      </div>
+      <div class="swatch fill-cream">
+        <div><div class="swatch__name">Crema</div></div>
+        <div class="swatch__hex">#FDF9F0</div>
+      </div>
+      <div class="swatch fill-bone">
+        <div><div class="swatch__name">Hueso cálido</div></div>
+        <div class="swatch__hex">#E8DFCC</div>
+      </div>
+      <div class="swatch fill-sage">
+        <div><div class="swatch__name">Salvia</div></div>
+        <div class="swatch__hex">#5A6B52</div>
+      </div>
+      <div class="swatch" style="background: #ebe4d5; color: #141414;">
+        <div><div class="swatch__name">Beige</div></div>
+        <div class="swatch__hex">#EBE4D5</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Tipografía ===== -->
+  <section class="block">
+    <div class="block__label">04 · Tipografía</div>
+    <h2 class="block__title">Un serif editorial, <em>un sans humanista.</em></h2>
+
+    <div class="specimen">
+      <div class="specimen__meta">Display · Fraunces — Variable optical size</div>
+      <div class="specimen__sample-display">humana <em>legal</em></div>
+      <div class="specimen__row">
+        <small>Regular 400</small>
+        <span style="font-family: var(--display); font-weight: 400; font-size: 1.5rem;">Asesoría con propósito</span>
+      </div>
+      <div class="specimen__row">
+        <small>Light italic</small>
+        <span style="font-family: var(--display); font-weight: 300; font-style: italic; font-size: 1.5rem; color: var(--clay);">Asesoría con propósito</span>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--ink-soft); margin-top: 1rem;">
+        Fraunces es una tipografía variable contemporánea inspirada en el trabajo de Morris Fuller Benton. Su tamaño óptico variable la hace ideal tanto para titulares grandes como para cuerpos de texto editoriales. Gratis en Google Fonts.
+      </p>
+    </div>
+
+    <div class="specimen">
+      <div class="specimen__meta">Texto · Manrope — Sans humanista moderna</div>
+      <p class="specimen__sample-body">
+        En Humana Legal acompañamos a personas, empresas y organismos en procesos donde el derecho se cruza con la vida: migrar, reclamar una decisión administrativa, defender un derecho fundamental. Nuestro enfoque combina rigor técnico con lenguaje claro, estrategia con empatía, y precisión con cercanía. Cada caso es una historia, y cada estrategia, un traje a medida.
+      </p>
+    </div>
+
+    <p style="font-size: 0.88rem; color: var(--ink-soft); max-width: 58ch;">
+      Se abandona Instrument Sans como display a favor de <strong style="color: var(--ink);">Fraunces</strong>. El cambio hace al sistema más distintivo, más editorial, más memorable. La cursiva de Fraunces (ligera, con trazo caligráfico) reemplaza al borgoña como acento expresivo.
+    </p>
+  </section>
+
+  <!-- ===== Tagline ===== -->
+  <section class="block">
+    <div class="block__label">05 · Taglines candidatas</div>
+    <h2 class="block__title">El derecho, <em>al servicio de las personas.</em></h2>
+    <ul class="taglines">
+      <li>Derecho <em>centrado en las personas.</em><small>Directa · institucional</small></li>
+      <li>Cada caso, <em>una historia.</em><small>Emotiva · memorable</small></li>
+      <li>El derecho, <em>más humano.</em><small>Aspiracional · punzante</small></li>
+      <li>Asesoría con <em>propósito.</em><small>Corta · polivalente (ya está en el sitio)</small></li>
+      <li>Rigor técnico. <em>Trato humano.</em><small>Declarativa · dos tiempos</small></li>
+    </ul>
+  </section>
+
+  <!-- ===== Aplicación: Tarjeta ===== -->
+  <section class="block">
+    <div class="block__label">06 · Tarjeta profesional</div>
+    <h2 class="block__title">Papelería <em>minimal, táctil.</em></h2>
+    <p style="color: var(--ink-2); max-width: 58ch;">Impresión recomendada: papel hueso texturado (Cordenons Wild o similar, 300gsm), tipografía a una tinta + tinta arcilla para acentos. Formato europeo 85×55mm.</p>
+
+    <div class="cards">
+      <div class="card card--front">
+        <div class="card__brand">humana <em>legal</em></div>
+        <div>
+          <div class="card__name">Tamara López González</div>
+          <div class="card__role">Abogada</div>
+        </div>
+        <div class="card__contact">
+          contacto@humanalegal.cl<br />
+          +56 9 0000 0000<br />
+          Santiago · Valparaíso
+        </div>
+      </div>
+
+      <div class="card card--back">
+        <div class="card__brand card__brand--back">humana <em>legal</em></div>
+        <div class="card__tagline">El derecho, al servicio de las personas.</div>
+        <div style="font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay-light); font-weight: 500;">humanalegal.cl</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Aplicación: Sitio ===== -->
+  <section class="block">
+    <div class="block__label">07 · Sitio web con nueva identidad</div>
+    <h2 class="block__title">Preview del hero <em>con Humana Legal.</em></h2>
+    <div class="site-preview">
+      <div class="site-preview__nav">
+        <div class="site-preview__nav-brand">humana <em>legal</em></div>
+        <div class="site-preview__nav-links"><span>Áreas</span><span>Perfil</span><span>Enfoque</span><span>Contacto</span></div>
+      </div>
+      <div class="site-preview__hero">
+        <div class="site-preview__eyebrow">Santiago · Valparaíso · Viña del Mar</div>
+        <h3 class="site-preview__title">El derecho,<br /><em>al servicio de las personas.</em></h3>
+        <p class="site-preview__lede">Asesoría jurídica en derecho migratorio, derechos humanos y derecho administrativo. Para personas, empresas y organismos que buscan una defensa rigurosa, estratégica y cercana.</p>
+        <a href="#" class="site-preview__cta">Agendar primera consulta</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Ventajas / trade-offs ===== -->
+  <section class="block">
+    <div class="block__label">08 · Trade-offs vs marca personal</div>
+    <h2 class="block__title">Qué se gana, <em>qué se pierde.</em></h2>
+
+    <div class="grid-2">
+      <div class="notes">
+        <p><strong style="color: var(--clay);">Se gana:</strong></p>
+        <p>→ Marca escalable y vendible. Humana Legal puede crecer y sobrevivir a Tamara.</p>
+        <p>→ Diferenciación inmediata en un mercado saturado de apellidos.</p>
+        <p>→ Posicionamiento claro: "humano" como promesa de valor.</p>
+        <p>→ Relato fácil de comunicar en prensa, LinkedIn, redes.</p>
+        <p>→ Portable al inglés: "Humana Legal" se entiende en ambos idiomas.</p>
+      </div>
+      <div class="notes">
+        <p><strong style="color: var(--clay);">Se pierde / hay que manejar:</strong></p>
+        <p>→ La transferencia de autoridad personal de Tamara a una marca abstracta toma tiempo.</p>
+        <p>→ Hay que chequear disponibilidad: <code>humanalegal.cl</code>, razón social, marca registrada en INAPI.</p>
+        <p>→ El sitio debe explicitar "Tamara López G. es la fundadora y abogada a cargo" en el perfil.</p>
+        <p>→ Durante el primer año, conviene comunicar <em>"Humana Legal · por Tamara López G."</em> para aprovechar su crédito académico.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Siguientes pasos ===== -->
+  <section class="block">
+    <div class="block__label">09 · Siguientes pasos si gusta</div>
+    <h2 class="block__title">Antes de adoptarla formalmente.</h2>
+    <ol style="padding-left: 1.5rem; color: var(--ink-2); line-height: 1.8; max-width: 60ch;">
+      <li>Verificar disponibilidad del dominio <code>humanalegal.cl</code> en NIC Chile.</li>
+      <li>Consultar en <a href="https://www.inapi.cl" style="color: var(--clay); border-bottom: 1px solid;">INAPI</a> si "Humana Legal" está registrada como marca en la clase 45 (servicios jurídicos).</li>
+      <li>Revisar que Tamara se identifique personalmente con el nombre (prueba de voz alta 30 veces).</li>
+      <li>Si avanzamos, aplicar la identidad al sitio (tomo 1-2 horas) y generar los assets: logo SVG, favicon, tarjeta, firma de email, plantilla LinkedIn banner.</li>
+      <li>Registrar marca en INAPI (opcional pero recomendado, ~$150.000 CLP cada 10 años).</li>
+    </ol>
+  </section>
+
+  <footer>
+    Exploración de marca generada para Tamara López G. · Humana Legal es una propuesta de trabajo, no un compromiso final.
+  </footer>
+
+</div>
+</body>
+</html>

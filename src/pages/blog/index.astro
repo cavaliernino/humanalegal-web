@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { SITE_URL } from '../../config';
+
+const posts = (
+	await getCollection('blog', (e) => e.data.lang === 'es' && (import.meta.env.PROD ? !e.data.draft : true))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Base
+	title="Blog — Artículos y guías de derecho migratorio | Humana Legal"
+	description="Orientación clara sobre derecho migratorio y derechos humanos en Chile: residencias, reunificación familiar, expulsiones, refugio y más."
+	canonical={`${SITE_URL}/blog/`}
+	alternateEs={`${SITE_URL}/blog/`}
+	alternateEn={`${SITE_URL}/en/blog/`}
+	langSwitchHref="/en/blog/"
+>
+	<section class="section blog-index">
+		<div class="container">
+			<span class="section__label">Blog</span>
+			<h1 class="section__title">Artículos y guías, <em>en lenguaje claro.</em></h1>
+			<p class="blog-index__intro">
+				Orientación sobre derecho migratorio y derechos humanos en Chile. Información general
+				para entender sus derechos y los pasos a seguir.
+			</p>
+			<PostList posts={posts} lang="es" />
+		</div>
+	</section>
+</Base>
+
+<style>
+	.blog-index__intro {
+		max-width: 56ch;
+		color: var(--ink-2);
+		margin-bottom: 3rem;
+	}
+</style>

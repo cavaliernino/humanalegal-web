@@ -1,0 +1,112 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WaFloat from '../components/WaFloat.astro';
+import { content, getLocale } from '../i18n/content';
+import { getJsonLd } from '../i18n/jsonld';
+import { SITE_URL, UMAMI } from '../config';
+
+const locale = getLocale(Astro.currentLocale);
+const c = content[locale];
+
+interface Props {
+	title?: string;
+	description?: string;
+	canonical?: string;
+	alternateEs?: string;
+	alternateEn?: string;
+	ogType?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string;
+	twitterDescription?: string;
+	jsonLd?: object;
+	/* href para el botón de idioma del header (por defecto, la home del otro idioma). */
+	langSwitchHref?: string;
+}
+
+const {
+	title = c.meta.title,
+	description = c.meta.description,
+	canonical = locale === 'es' ? `${SITE_URL}/` : `${SITE_URL}/en/`,
+	alternateEs = `${SITE_URL}/`,
+	alternateEn = `${SITE_URL}/en/`,
+	ogType = 'website',
+	ogTitle = c.meta.ogTitle,
+	ogDescription = c.meta.ogDescription,
+	ogImage = `${SITE_URL}/assets/images/og-image.jpg`,
+	twitterDescription = c.meta.twitterDescription,
+	jsonLd = getJsonLd(locale),
+	langSwitchHref,
+} = Astro.props;
+
+const jsonLdStr = JSON.stringify(jsonLd, null, 2);
+---
+
+<!doctype html>
+<html lang={c.meta.htmlLang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={c.meta.keywords} />
+		<meta name="author" content="Tamara López González" />
+		<meta name="robots" content={c.meta.robots} />
+		<meta name="geo.region" content="CL-VS" />
+
+		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="es-CL" href={alternateEs} />
+		<link rel="alternate" hreflang="en" href={alternateEn} />
+		<link rel="alternate" hreflang="x-default" href={alternateEs} />
+
+		<meta property="og:type" content={ogType} />
+		<meta property="og:locale" content={c.meta.ogLocale} />
+		<meta property="og:locale:alternate" content={c.meta.ogLocaleAlt} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogTitle} />
+		<meta property="og:site_name" content="Humana Legal" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={ogTitle} />
+		<meta name="twitter:description" content={twitterDescription} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg" />
+		<meta name="theme-color" content="#141414" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="alternate" type="application/rss+xml" title="Humana Legal — Blog"
+			href={locale === 'es' ? '/blog/rss.xml' : '/en/blog/rss.xml'} />
+
+		<link rel="stylesheet" href="/assets/css/styles.css" />
+
+		<script type="application/ld+json" set:html={jsonLdStr} />
+	</head>
+	<body>
+		<Nav langSwitchHref={langSwitchHref} />
+		<slot />
+		<Footer />
+		<WaFloat />
+
+		<script src="/assets/js/main.js" defer is:inline></script>
+		{
+			UMAMI.src && UMAMI.websiteId && (
+				<script defer src={UMAMI.src} data-website-id={UMAMI.websiteId} is:inline />
+			)
+		}
+	</body>
+</html>

@@ -1,0 +1,58 @@
+---
+import { content, getLocale } from '../i18n/content';
+import { CONTACT } from '../config';
+
+const locale = getLocale(Astro.currentLocale);
+const { footer } = content[locale];
+const homeHref = locale === 'es' ? '/' : '/en/';
+
+// Fuera de la home, las anclas (#areas) deben apuntar a la home.
+const pathname = Astro.url.pathname;
+const isHome = pathname === homeHref || pathname === homeHref.replace(/\/$/, '');
+const hashBase = isHome ? '' : homeHref;
+const resolve = (href: string) => (href.startsWith('#') ? `${hashBase}${href}` : href);
+---
+
+<footer class="footer">
+	<div class="container footer__inner">
+		<div class="footer__brand">
+			<span class="footer__wordmark">humana <em>legal</em></span>
+			<p set:html={footer.taglineHtml} />
+		</div>
+
+		<nav class="footer__nav" aria-label={footer.navAria}>
+			{
+				footer.columns.map((column) => (
+					<div>
+						<h4>{column.title}</h4>
+						{column.links.map((link) => (
+							<a href={resolve(link.href)}>{link.label}</a>
+						))}
+					</div>
+				))
+			}
+			<div>
+				<h4>{locale === 'es' ? 'Contacto' : 'Contact'}</h4>
+				<a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+				<a href={`tel:${CONTACT.phoneHref}`}>{CONTACT.phoneDisplay}</a>
+				<a href={CONTACT.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+			</div>
+		</nav>
+	</div>
+
+	<div class="footer__bottom">
+		<div class="container footer__bottom-inner">
+			<small>© <span id="year">2026</span> {footer.rights}</small>
+			<small>
+				{
+					footer.bottomLinks.map((link, index) => (
+						<>
+							{index > 0 && ' · '}
+							<a href={link.href}>{link.label}</a>
+						</>
+					))
+				}
+			</small>
+		</div>
+	</div>
+</footer>

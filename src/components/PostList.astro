@@ -1,0 +1,104 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	lang: 'es' | 'en';
+}
+const { posts, lang } = Astro.props;
+
+const base = lang === 'es' ? '' : '/en';
+const slugOf = (id: string) => id.replace(/^(es|en)\//, '');
+const fmt = new Intl.DateTimeFormat(lang === 'es' ? 'es-CL' : 'en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+const t = {
+	es: { empty: 'Pronto publicaremos los primeros artículos.', more: 'Leer artículo →' },
+	en: { empty: 'Our first articles are coming soon.', more: 'Read article →' },
+}[lang];
+---
+
+{
+	posts.length === 0 ? (
+		<p class="post-list__empty">{t.empty}</p>
+	) : (
+		<ul class="post-list">
+			{posts.map((post) => (
+				<li class="post-card">
+					<a class="post-card__link" href={`${base}/blog/${slugOf(post.id)}/`}>
+						<div class="post-card__meta">
+							<time datetime={post.data.pubDate.toISOString()}>
+								{fmt.format(post.data.pubDate)}
+							</time>
+							{post.data.tags.length > 0 && <span>{post.data.tags[0]}</span>}
+						</div>
+						<h2 class="post-card__title">{post.data.title}</h2>
+						<p class="post-card__desc">{post.data.description}</p>
+						<span class="post-card__more">{t.more}</span>
+					</a>
+				</li>
+			))}
+		</ul>
+	)
+}
+
+<style>
+	.post-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-top: 1px solid var(--line);
+	}
+	.post-card {
+		border-bottom: 1px solid var(--line);
+	}
+	.post-card__link {
+		display: block;
+		padding: 2rem 0;
+		text-decoration: none;
+		color: inherit;
+		transition: opacity 0.15s ease;
+	}
+	.post-card__link:hover {
+		opacity: 0.78;
+	}
+	.post-card__meta {
+		display: flex;
+		gap: 1rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--ink-soft);
+		margin-bottom: 0.75rem;
+	}
+	.post-card__meta span {
+		color: var(--clay);
+		font-weight: 600;
+	}
+	.post-card__title {
+		font-family: var(--font-display);
+		font-weight: 400;
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		letter-spacing: -0.015em;
+		line-height: 1.15;
+		margin: 0 0 0.5rem;
+		color: var(--ink);
+	}
+	.post-card__desc {
+		margin: 0 0 0.9rem;
+		color: var(--ink-2);
+		max-width: 60ch;
+	}
+	.post-card__more {
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: var(--clay);
+	}
+	.post-list__empty {
+		border-top: 1px solid var(--line);
+		padding-top: 2rem;
+		color: var(--ink-soft);
+	}
+</style>

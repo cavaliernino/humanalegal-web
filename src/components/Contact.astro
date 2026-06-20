@@ -1,0 +1,95 @@
+---
+import { content, getLocale } from '../i18n/content';
+import { CONTACT } from '../config';
+
+const locale = getLocale(Astro.currentLocale);
+const { contact } = content[locale];
+---
+
+<section class="contact section" id={contact.id}>
+	<div class="container contact__grid">
+		<div class="contact__info">
+			<span class="section__label">{contact.label}</span>
+			<h2 class="section__title" set:html={contact.titleHtml} />
+			<p>{contact.intro}</p>
+
+			<dl class="contact__details">
+				{
+					contact.details.map((detail) => (
+						<div>
+							<dt>{detail.dt}</dt>
+							<dd>
+								{detail.type === 'email' && (
+									<a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+								)}
+								{detail.type === 'phone' && (
+									<a href={`tel:${CONTACT.phoneHref}`}>{CONTACT.phoneDisplay}</a>
+								)}
+								{detail.type === 'whatsapp' && (
+									<a href={CONTACT.whatsapp} target="_blank" rel="noopener">
+										{contact.whatsappLabel}
+									</a>
+								)}
+								{detail.type === 'text' && detail.text}
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+
+			<a href="#" class="contact__calendly" data-calendly>
+				<span>{contact.calendly.label}</span>
+				<small>{contact.calendly.note}</small>
+			</a>
+		</div>
+
+		<form class="contact__form" id="contact-form" novalidate>
+			<div class="field">
+				<label for="name">{contact.form.name}</label>
+				<input type="text" id="name" name="name" required autocomplete="name" />
+			</div>
+
+			<div class="field">
+				<label for="email">{contact.form.email}</label>
+				<input type="email" id="email" name="email" required autocomplete="email" />
+			</div>
+
+			<div class="field">
+				<label for="phone">{contact.form.phone}</label>
+				<input type="tel" id="phone" name="phone" autocomplete="tel" />
+			</div>
+
+			<div class="field">
+				<label for="area">{contact.form.area}</label>
+				<select id="area" name="area" required>
+					<option value="">{contact.form.areaPlaceholder}</option>
+					{
+						contact.form.areaOptions.map((option) => (
+							<option value={option.value}>{option.label}</option>
+						))
+					}
+				</select>
+			</div>
+
+			<div class="field">
+				<label for="message">{contact.form.message}</label>
+				<textarea id="message" name="message" rows="5" required></textarea>
+			</div>
+
+			<!-- Honeypot anti-spam -->
+			<div class="field field--hp" aria-hidden="true">
+				<label for="website">{contact.form.hpLabel}</label>
+				<input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+			</div>
+
+			<div class="field field--check">
+				<input type="checkbox" id="privacy" name="privacy" required />
+				<label for="privacy" set:html={contact.form.privacyHtml} />
+			</div>
+
+			<button type="submit" class="btn btn--primary btn--block">{contact.form.submit}</button>
+
+			<p class="form__note" role="status" aria-live="polite"></p>
+		</form>
+	</div>
+</section>

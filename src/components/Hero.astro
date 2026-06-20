@@ -1,0 +1,41 @@
+---
+import { content, getLocale } from '../i18n/content';
+
+const locale = getLocale(Astro.currentLocale);
+const { hero } = content[locale];
+---
+
+<section class="hero">
+	<div class="container hero__inner">
+		<div class="hero__eyebrow">
+			<span class="dot"></span>
+			<span>{hero.eyebrow}</span>
+		</div>
+
+		<h1 class="hero__title" set:html={hero.titleHtml} />
+
+		<p class="hero__lede">{hero.lede}</p>
+
+		<div class="hero__cta">
+			<a href={hero.ctaPrimary.href} class="btn btn--primary">{hero.ctaPrimary.label}</a>
+			<a href={hero.ctaGhost.href} class="btn btn--ghost">{hero.ctaGhost.label}</a>
+		</div>
+
+		<div class="hero__meta">
+			{
+				hero.meta.map((item) => (
+					<div>
+						<strong>{item.num}</strong> {item.text}
+					</div>
+				))
+			}
+		</div>
+	</div>
+
+	<div class="hero__aside" aria-hidden="true">
+		<div class="hero__sig">
+			<span>{hero.sig.name}</span>
+			<span class="hero__sig-sub">{hero.sig.sub}</span>
+		</div>
+	</div>
+</section>

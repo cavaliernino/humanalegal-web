@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tamara López G. — Exploración de marca (Opción B)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Inter:wght@400..700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0e0f11;
+    --slate: #2a2e35;
+    --steel: #878d99;
+    --paper: #f7f7f5;
+    --white: #ffffff;
+    --cobalt: #1d3fea;
+    --cobalt-deep: #1530b8;
+    --line: rgba(14, 15, 17, 0.14);
+    --line-light: rgba(14, 15, 17, 0.07);
+    --display: "Archivo", system-ui, sans-serif;
+    --body: "Inter", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--body);
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: clamp(2rem, 5vw, 5rem) clamp(1.5rem, 4vw, 3rem); }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cobalt);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .kicker::before { content: ""; width: 2rem; height: 2px; background: currentColor; }
+
+  /* Header */
+  .intro { padding-bottom: clamp(3rem, 6vw, 5rem); border-bottom: 2px solid var(--black); margin-bottom: clamp(3rem, 6vw, 5rem); }
+  .intro .kicker { margin-bottom: 2rem; }
+  .intro__title {
+    font-family: var(--display);
+    font-weight: 700;
+    font-stretch: 118%;
+    font-size: clamp(2.8rem, 8vw, 6.2rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .intro__title span { color: var(--cobalt); }
+  .intro__lede { font-size: 1.12rem; max-width: 62ch; color: var(--slate); }
+
+  /* Blocks */
+  .block { padding: clamp(3rem, 6vw, 5rem) 0; border-bottom: 1px solid var(--line); }
+  .block:last-of-type { border-bottom: none; }
+  .block__label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 1.5rem;
+  }
+  .block__title {
+    font-family: var(--display);
+    font-weight: 650;
+    font-stretch: 112%;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+  .block__title span { color: var(--cobalt); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+  @media (max-width: 760px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .prose p { font-size: 1.02rem; color: var(--slate); margin-bottom: 1.2rem; }
+  .prose strong { color: var(--black); font-weight: 600; }
+  .prose ul { padding-left: 1.2rem; color: var(--slate); line-height: 1.7; }
+
+  .notes { padding: 1.75rem; background: var(--paper); border-left: 3px solid var(--cobalt); font-size: 0.95rem; color: var(--slate); }
+  .notes p + p { margin-top: 0.75rem; }
+  .notes strong { color: var(--black); }
+
+  /* Logo boxes */
+  .logo-box {
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--white);
+  }
+  .logo-box--dark { background: var(--black); border-color: var(--black); }
+  .logo-box--cobalt { background: var(--cobalt); border-color: var(--cobalt); }
+
+  .lockup { text-align: center; }
+  .lockup__name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-stretch: 120%;
+    font-size: clamp(1.5rem, 3.4vw, 2.6rem);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--black);
+  }
+  .lockup__name .g { color: var(--cobalt); }
+  .lockup__sub {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    margin-top: 0.9em;
+    color: var(--steel);
+  }
+  .lockup--light .lockup__name { color: var(--white); }
+  .lockup--light .lockup__sub { color: rgba(255, 255, 255, 0.55); }
+  .lockup--mono .lockup__name, .lockup--mono .lockup__name .g { color: var(--white); }
+
+  .variants { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  .mono-box {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+  }
+  .mono-box--dark { background: var(--black); border-color: var(--black); }
+  .mono-box--cobalt { background: var(--cobalt); border-color: var(--cobalt); }
+  .monogram {
+    font-family: var(--display);
+    font-weight: 800;
+    font-stretch: 125%;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--black);
+  }
+  .monogram .dot { color: var(--cobalt); }
+  .monogram--light { color: var(--white); }
+  .monogram--light .dot { color: var(--cobalt); }
+  .monogram--flat, .monogram--flat .dot { color: var(--white); }
+
+  .asset-caption {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
+    border-top: 1px solid var(--line-light);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  /* Palette */
+  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 900px) { .palette { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 500px) { .palette { grid-template-columns: repeat(2, 1fr); } }
+  .swatch {
+    aspect-ratio: 3 / 4;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--line-light);
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Specimens */
+  .specimen { padding: 1.75rem; border: 1px solid var(--line); margin-bottom: 1rem; background: var(--white); }
+  .specimen__meta {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 1.25rem;
+  }
+  .specimen__display {
+    font-family: var(--display);
+    font-weight: 700;
+    font-stretch: 120%;
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+  }
+  .specimen__display span { color: var(--cobalt); }
+  .specimen__row { display: flex; gap: 1.5rem; align-items: baseline; margin-top: 1rem; flex-wrap: wrap; }
+  .specimen__row small {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--steel);
+    min-width: 110px;
+  }
+  .specimen__body { font-size: 1rem; color: var(--slate); max-width: 62ch; }
+  .specimen__note { font-size: 0.88rem; color: var(--steel); margin-top: 1rem; max-width: 60ch; }
+  .specimen__mono { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.06em; }
+
+  /* Taglines */
+  .taglines { list-style: none; }
+  .taglines li {
+    font-family: var(--display);
+    font-weight: 650;
+    font-stretch: 112%;
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    letter-spacing: -0.015em;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--line-light);
+    line-height: 1.1;
+  }
+  .taglines li:last-child { border-bottom: none; }
+  .taglines small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-top: 0.5rem;
+    font-weight: 400;
+  }
+  .taglines .flag { color: var(--cobalt); }
+
+  /* Cards */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
+  @media (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    aspect-ratio: 1.75 / 1;
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 48px -24px rgba(14, 15, 17, 0.3);
+  }
+  .card--front { background: var(--white); }
+  .card--back { background: var(--black); color: var(--white); border-color: var(--black); }
+  .card__brand {
+    font-family: var(--display);
+    font-weight: 700;
+    font-stretch: 120%;
+    font-size: 1.05rem;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  .card__brand .g { color: var(--cobalt); }
+  .card__role {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-top: 0.3rem;
+  }
+  .card__contact { font-family: var(--mono); font-size: 0.68rem; color: var(--slate); line-height: 1.7; }
+  .card--back .card__tagline {
+    font-family: var(--display);
+    font-weight: 650;
+    font-stretch: 112%;
+    font-size: 1.15rem;
+    line-height: 1.15;
+    max-width: 18ch;
+  }
+  .card--back .card__site { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cobalt); filter: brightness(1.6); }
+
+  /* Site preview */
+  .site-preview { border: 1px solid var(--line); margin-top: 1.5rem; background: var(--black); color: var(--white); }
+  .site-preview__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem clamp(1.5rem, 3vw, 2.5rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.8rem;
+  }
+  .site-preview__brand { font-family: var(--display); font-weight: 700; font-stretch: 120%; font-size: 0.92rem; text-transform: uppercase; }
+  .site-preview__brand .g { color: var(--cobalt); filter: brightness(1.5); }
+  .site-preview__links { display: flex; gap: 1.4rem; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--steel); }
+  .site-preview__hero { padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem); }
+  .site-preview__eyebrow {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cobalt);
+    filter: brightness(1.6);
+    margin-bottom: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .site-preview__eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: currentColor; }
+  .site-preview__title {
+    font-family: var(--display);
+    font-weight: 750;
+    font-stretch: 118%;
+    font-size: clamp(2.4rem, 6.5vw, 5rem);
+    line-height: 0.94;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+  .site-preview__title span { color: var(--cobalt); filter: brightness(1.5); }
+  .site-preview__lede { color: rgba(255, 255, 255, 0.72); max-width: 52ch; margin-bottom: 2.2rem; font-size: 1.02rem; }
+  .site-preview__cta {
+    display: inline-block;
+    background: var(--cobalt);
+    color: var(--white);
+    padding: 0.95rem 1.7rem;
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  footer.colophon {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--black);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+  }
+
+  ol.steps { padding-left: 1.4rem; color: var(--slate); line-height: 1.85; max-width: 62ch; }
+  ol.steps a { color: var(--cobalt); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="intro">
+    <span class="kicker">Opción B · Exploración de marca personal · Junio 2026</span>
+    <h1 class="intro__title">Tamara<br />López <span>G.</span></h1>
+    <p class="intro__lede">
+      El contrapunto de Humana Legal: en lugar de construir un estudio con promesa de calidez,
+      construir una <strong>marca personal de autoridad</strong>. Quien contrata litigios contra el Estado
+      no compra una institución: compra a la abogada que firma. Esta opción pone el nombre, la
+      trayectoria y el criterio de Tamara en el centro — sin adornos, con precisión.
+    </p>
+  </section>
+
+  <!-- ===== 01 Concepto ===== -->
+  <section class="block">
+    <div class="block__label">01 — Concepto</div>
+    <h2 class="block__title">La estratega que conoce <span>las dos caras del Estado.</span></h2>
+    <div class="grid-2">
+      <div class="prose">
+        <p>
+          La biografía de Tamara tiene un activo que ninguna marca abstracta puede capitalizar igual de bien:
+          <strong>quince años trabajando con y frente al aparato público</strong> — comunicación estratégica,
+          dirección de un centro del SENAME, práctica en Migraciones — antes de llegar al litigio.
+          La marca personal convierte esa historia en el producto.
+        </p>
+        <p>
+          El tono visual es el de un <strong>documento jurídico bien compuesto</strong>: tipografía grotesca
+          monumental, numeración de expediente, líneas de pauta, un solo color de énfasis. Nada decorativo.
+          La calidez no está en el color: está en la claridad.
+        </p>
+        <ul>
+          <li><strong>Derecho Público</strong> — el área principal pide autoridad, no cercanía.</li>
+          <li><strong>Empresas y organismos</strong> — este lenguaje les resulta nativo.</li>
+          <li><strong>Migratorio / DDHH</strong> — la claridad extrema también es una forma de respeto.</li>
+        </ul>
+      </div>
+      <div class="notes">
+        <p><strong>Por qué funciona en esta etapa.</strong> Una abogada que recién jura no tiene track record institucional que mostrar, pero sí una trayectoria personal verificable. La marca personal pone la carga de la prueba donde Tamara ya tiene evidencia.</p>
+        <p><strong>El dominio ya existe.</strong> tamaralopez.cl está comprado y apunta al servidor. Cero trámites: ni INAPI, ni razón social, ni transferencia de autoridad de una marca nueva.</p>
+        <p><strong>Riesgo a la vista.</strong> El público migratorio vulnerable puede sentir más distancia con esta estética que con la calidez de Humana Legal. Trade-offs completos en la sección 08.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02 Sistema de identidad ===== -->
+  <section class="block">
+    <div class="block__label">02 — Sistema de identidad</div>
+    <h2 class="block__title">Un lockup tipográfico, <span>un monograma de sello.</span></h2>
+
+    <div class="grid-2">
+      <div>
+        <div class="logo-box">
+          <div class="lockup">
+            <div class="lockup__name">Tamara López <span class="g">G.</span></div>
+            <span class="lockup__sub">Abogada — Derecho Público · Migratorio · DDHH</span>
+          </div>
+        </div>
+        <div class="asset-caption"><span>Lockup principal</span><span>Fondo claro</span></div>
+      </div>
+      <div>
+        <div class="logo-box logo-box--dark">
+          <div class="lockup lockup--light">
+            <div class="lockup__name">Tamara López <span class="g">G.</span></div>
+            <span class="lockup__sub">Abogada — Attorney at Law</span>
+          </div>
+        </div>
+        <div class="asset-caption"><span>Versión en negativo</span><span>Fondo oscuro</span></div>
+      </div>
+    </div>
+
+    <div class="variants">
+      <div>
+        <div class="mono-box">
+          <div class="monogram">TL<span class="dot">.</span></div>
+        </div>
+        <div class="asset-caption"><span>Monograma</span><span>TL.</span></div>
+      </div>
+      <div>
+        <div class="mono-box mono-box--dark">
+          <div class="monogram monogram--light">TL<span class="dot">.</span></div>
+        </div>
+        <div class="asset-caption"><span>Negativo</span><span>Fondos oscuros</span></div>
+      </div>
+      <div>
+        <div class="mono-box mono-box--cobalt">
+          <div class="monogram monogram--flat">TL<span class="dot">.</span></div>
+        </div>
+        <div class="asset-caption"><span>Favicon / sello</span><span>Plano cobalto</span></div>
+      </div>
+    </div>
+
+    <p class="specimen__note" style="margin-top: 1.5rem;">
+      El punto final del monograma funciona como "firma": la frase está terminada, la posición está tomada.
+      La "G." en cobalto distingue el lockup sin agregar ningún elemento gráfico ajeno a la tipografía.
+    </p>
+  </section>
+
+  <!-- ===== 03 Paleta ===== -->
+  <section class="block">
+    <div class="block__label">03 — Paleta</div>
+    <h2 class="block__title">Blanco y negro, <span>con un voto de minoría.</span></h2>
+    <p class="prose" style="max-width: 60ch; color: var(--slate); margin-bottom: 0.5rem;">
+      Monocromo casi total: grafito sobre blanco roto, gris acero para lo secundario. El cobalto se usa
+      como un juez usa el timbre — poco, y solo donde decide algo: enlaces, énfasis, la "G.", el CTA.
+      Sin colores cálidos: la distancia con la paleta hueso/arcilla de Humana Legal es deliberada.
+    </p>
+
+    <div class="palette">
+      <div class="swatch" style="background: #0e0f11; color: #f7f7f5;">
+        <span>Grafito</span><span>#0E0F11</span>
+      </div>
+      <div class="swatch" style="background: #2a2e35; color: #f7f7f5;">
+        <span>Pizarra</span><span>#2A2E35</span>
+      </div>
+      <div class="swatch" style="background: #1d3fea; color: #ffffff;">
+        <span>Cobalto</span><span>#1D3FEA</span>
+      </div>
+      <div class="swatch" style="background: #878d99; color: #0e0f11;">
+        <span>Acero</span><span>#878D99</span>
+      </div>
+      <div class="swatch" style="background: #f7f7f5; color: #0e0f11;">
+        <span>Blanco roto</span><span>#F7F7F5</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04 Tipografía ===== -->
+  <section class="block">
+    <div class="block__label">04 — Tipografía</div>
+    <h2 class="block__title">Una grotesca expandida, <span>una mono de expediente.</span></h2>
+
+    <div class="specimen">
+      <div class="specimen__meta">Display · Archivo — variable (peso + ancho), uso expandido en mayúsculas</div>
+      <div class="specimen__display">Precisión frente <span>al poder.</span></div>
+      <div class="specimen__row">
+        <small>Expanded 700</small>
+        <span style="font-family: var(--display); font-weight: 700; font-stretch: 120%; font-size: 1.4rem; text-transform: uppercase; letter-spacing: -0.02em;">Litigar es estrategia</span>
+      </div>
+      <div class="specimen__row">
+        <small>Normal 500</small>
+        <span style="font-family: var(--display); font-weight: 500; font-size: 1.4rem;">Litigar es estrategia</span>
+      </div>
+      <p class="specimen__note">
+        Archivo es una grotesca variable pensada para titulares de prensa; su eje de ancho permite pasar
+        de monumental (expandida, mayúsculas) a neutra sin cambiar de familia. Gratis en Google Fonts.
+      </p>
+    </div>
+
+    <div class="specimen">
+      <div class="specimen__meta">Texto · Inter — sans neutra de alta legibilidad</div>
+      <p class="specimen__body">
+        Represento a personas, empresas y organismos en litigios y procedimientos frente al Estado.
+        Mi método combina rigor jurídico con quince años de experiencia en asuntos públicos: entiendo
+        cómo decide la Administración porque trabajé dentro y fuera de ella. Cada caso recibe una
+        estrategia, un responsable y un plan de comunicación claro.
+      </p>
+    </div>
+
+    <div class="specimen">
+      <div class="specimen__meta">Etiquetas · IBM Plex Mono — numeración, kickers, datos duros</div>
+      <p class="specimen__mono">01 — DERECHO PÚBLICO &nbsp;·&nbsp; CAUSA ROL 12.345-2026 &nbsp;·&nbsp; SANTIAGO · VALPARAÍSO</p>
+      <p class="specimen__note">
+        La mono evoca el folio y el expediente: aporta el "sabor jurídico" que en Humana Legal ponía la
+        serif editorial, pero desde la precisión en vez de la elegancia.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== 05 Taglines ===== -->
+  <section class="block">
+    <div class="block__label">05 — Taglines candidatas</div>
+    <h2 class="block__title">Decir mucho <span>con pocas palabras.</span></h2>
+    <ul class="taglines">
+      <li>Conozco al Estado por dentro.<small class="flag">Audaz · memorable · ⚠ validar con Tamara que se siente cómoda sosteniéndola</small></li>
+      <li>Precisión frente al poder.<small>Institucional · punzante</small></li>
+      <li>Litigar es estrategia.<small>Directa · síntesis del método</small></li>
+      <li>Derecho público, en lenguaje claro.<small>Servicial · diferenciadora frente al gremio</small></li>
+      <li>Quince años de asuntos públicos. Detrás de cada estrategia.<small>Biográfica · funciona mejor como bajada que como tagline</small></li>
+    </ul>
+  </section>
+
+  <!-- ===== 06 Tarjeta ===== -->
+  <section class="block">
+    <div class="block__label">06 — Tarjeta profesional</div>
+    <h2 class="block__title">Papelería de <span>una sola tinta y media.</span></h2>
+    <p class="prose" style="color: var(--slate); max-width: 58ch;">
+      Impresión recomendada: cartulina blanca lisa 350gsm, tipografía en negro + cobalto solo en la "G."
+      y el punto del monograma. Formato europeo 85×55mm. Sin laminados: papel seco, como un escrito.
+    </p>
+
+    <div class="cards">
+      <div class="card card--front">
+        <div>
+          <div class="card__brand">Tamara López <span class="g">G.</span></div>
+          <div class="card__role">Abogada — Derecho Público · Migratorio · DDHH</div>
+        </div>
+        <div class="card__contact">
+          contacto@tamaralopez.cl<br />
+          +56 9 0000 0000<br />
+          Santiago · Valparaíso
+        </div>
+      </div>
+
+      <div class="card card--back">
+        <div class="monogram monogram--light" style="font-size: 1.8rem;">TL<span class="dot">.</span></div>
+        <div class="card__tagline">Precisión frente al poder.</div>
+        <div class="card__site">tamaralopez.cl</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 07 Sitio ===== -->
+  <section class="block">
+    <div class="block__label">07 — El sitio con esta identidad</div>
+    <h2 class="block__title">Preview del hero <span>(prototipo completo en index.html).</span></h2>
+    <div class="site-preview">
+      <div class="site-preview__nav">
+        <div class="site-preview__brand">Tamara López <span class="g">G.</span></div>
+        <div class="site-preview__links"><span>Áreas</span><span>Perfil</span><span>Método</span><span>Contacto</span></div>
+      </div>
+      <div class="site-preview__hero">
+        <span class="site-preview__eyebrow">Abogada — Santiago · Valparaíso</span>
+        <h3 class="site-preview__title">Conozco al Estado<br /><span>por dentro.</span></h3>
+        <p class="site-preview__lede">
+          Litigación en derecho público, migratorio y derechos humanos.
+          Quince años de asuntos públicos detrás de cada estrategia.
+        </p>
+        <a href="index.html" class="site-preview__cta">Agendar primera consulta</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 08 Trade-offs ===== -->
+  <section class="block">
+    <div class="block__label">08 — Trade-offs frente a Humana Legal</div>
+    <h2 class="block__title">Qué se gana, <span>qué se pierde.</span></h2>
+
+    <div class="grid-2">
+      <div class="notes">
+        <p><strong style="color: var(--cobalt);">Se gana:</strong></p>
+        <p>→ Autoridad inmediata: el cliente contrata a una persona con nombre, cara y trayectoria verificable.</p>
+        <p>→ Cero fricción de lanzamiento: dominio comprado, sin INAPI, sin construir una marca desde cero.</p>
+        <p>→ Coherencia con LinkedIn y prensa: todo lo que Tamara publique alimenta la misma marca.</p>
+        <p>→ Posicionamiento nítido para derecho público y clientes corporativos/institucionales.</p>
+        <p>→ La biografía interdisciplinaria deja de ser contexto y pasa a ser el argumento central.</p>
+      </div>
+      <div class="notes" style="border-left-color: var(--steel);">
+        <p><strong>Se pierde / hay que manejar:</strong></p>
+        <p>→ No escala a estudio con socios ni es vendible: la marca es la persona.</p>
+        <p>→ Toda la carga reputacional recae en Tamara, sin amortiguador institucional.</p>
+        <p>→ La estética de autoridad puede distanciar al público migratorio vulnerable, donde la calidez de Humana Legal juega mejor.</p>
+        <p>→ "Humana Legal" quedaría en pausa: el dominio y el estudio de marca ya pagados se archivan (no se pierden — pueden volver cuando el estudio crezca).</p>
+        <p>→ Híbrido posible: lanzar como Tamara López G. y presentar Humana Legal más adelante como "el estudio de" — el camino inverso al de la v1.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 09 Siguientes pasos ===== -->
+  <section class="block">
+    <div class="block__label">09 — Siguientes pasos</div>
+    <h2 class="block__title">Cómo decidir entre las dos.</h2>
+    <ol class="steps">
+      <li>Ver el prototipo completo (<a href="index.html">index.html</a>, junto a este archivo) al lado de tamaralopez.cl actual, idealmente en pantalla grande y en el teléfono.</li>
+      <li>Pregunta clave para Tamara: ¿a quién quiere convencer primero — al gerente legal que la contrata para un contencioso, o a la familia migrante que necesita confiar de inmediato? Cada opción optimiza para uno.</li>
+      <li>Validar la tagline elegida en voz alta (¿la sostendría en una entrevista?).</li>
+      <li>Si gana la Opción B: portar la identidad al proyecto Astro (el contenido ya está separado del diseño, son ~2-3 horas) y generar assets (favicon TL., firma de email, banner LinkedIn).</li>
+      <li>Si gana Humana Legal: esta exploración queda como referencia para la línea "corporativa" de futuras piezas (propuestas a empresas, informes).</li>
+    </ol>
+  </section>
+
+  <footer class="colophon">
+    Exploración de marca · Opción B · Generada para Tamara López G. — Propuesta de trabajo, no compromiso final. La Opción A (Humana Legal) vive en v1/humana-legal/brand/.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+---
+import { content, getLocale } from '../i18n/content';
+
+const locale = getLocale(Astro.currentLocale);
+const { process } = content[locale];
+---
+
+<section class="fees section" id={process.id}>
+	<div class="container fees__grid">
+		<div>
+			<span class="section__label">{process.label}</span>
+			<h2 class="section__title" set:html={process.titleHtml} />
+			<p class="fees__lede">{process.lede}</p>
+		</div>
+
+		<ul class="fees__list">
+			{
+				process.steps.map((step) => (
+					<li>
+						<strong>{step.title}</strong>
+						<span>{step.text}</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

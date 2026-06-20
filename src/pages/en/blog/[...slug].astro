@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import BlogPost from '../../../layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+	const all = await getCollection('blog');
+	const posts = all.filter(
+		(e) => e.data.lang === 'en' && (import.meta.env.PROD ? !e.data.draft : true)
+	);
+	return posts.map((entry) => {
+		const translation = entry.data.translationKey
+			? all.find(
+					(e) =>
+						e.data.lang === 'es' &&
+						e.data.translationKey === entry.data.translationKey &&
+						(import.meta.env.PROD ? !e.data.draft : true)
+				)
+			: undefined;
+		return {
+			params: { slug: entry.id.replace(/^en\//, '') },
+			props: { entry, translation },
+		};
+	});
+}
+
+const { entry, translation } = Astro.props;
+---
+
+<BlogPost entry={entry} translation={translation} />
