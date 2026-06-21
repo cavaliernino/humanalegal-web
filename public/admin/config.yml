@@ -10,9 +10,9 @@
 
 backend:
   name: github
-  repo: TU_USUARIO/humanalegal-web # <-- COMPLETAR
+  repo: cavaliernino/humanalegal-web
   branch: main
-  base_url: https://TU-WORKER.workers.dev # <-- COMPLETAR (Cloudflare Worker)
+  base_url: https://sveltia-cms-auth.nino-bozzi.workers.dev
 
 # Las imágenes que suba Tamara van al repo y se sirven desde el sitio.
 media_folder: public/assets/images/blog
