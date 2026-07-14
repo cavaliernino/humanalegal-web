@@ -1,6 +1,6 @@
 ---
 import { content, getLocale } from '../i18n/content';
-import { CONTACT } from '../config';
+import { CONTACT, CALENDLY_URL } from '../config';
 
 const locale = getLocale(Astro.currentLocale);
 const { contact } = content[locale];
@@ -37,10 +37,13 @@ const { contact } = content[locale];
 				}
 			</dl>
 
-			<a href="#" class="contact__calendly" data-calendly>
-				<span>{contact.calendly.label}</span>
-				<small>{contact.calendly.note}</small>
-			</a>
+			{
+				CALENDLY_URL && (
+					<a href={CALENDLY_URL} class="contact__calendly" target="_blank" rel="noopener">
+						<span>{contact.calendly.label}</span>
+					</a>
+				)
+			}
 		</div>
 
 		<form class="contact__form" id="contact-form" novalidate>

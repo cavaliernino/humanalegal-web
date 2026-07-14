@@ -15,7 +15,7 @@ const { areas } = content[locale];
 		<div class="areas__grid">
 			{
 				areas.items.map((area) => (
-					<article class="area">
+					<article class="area" id={area.id}>
 						<div class="area__num">{area.num}</div>
 						<h3 class="area__title">{area.title}</h3>
 						<p class="area__desc">{area.desc}</p>

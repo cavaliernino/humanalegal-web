@@ -140,27 +140,6 @@
     });
   }
 
-  /* ---------- Calendly placeholder ---------- */
-  const calendlyLinks = document.querySelectorAll('[data-calendly]');
-  calendlyLinks.forEach((el) => {
-    el.addEventListener('click', (e) => {
-      // When Calendly URL is configured, update href and remove this handler
-      const CAL_URL = ''; // ← set Calendly URL here
-      if (!CAL_URL) {
-        e.preventDefault();
-        const c = document.getElementById('contacto') || document.getElementById('contact');
-        if (c) {
-          const top = c.getBoundingClientRect().top + window.scrollY - 72;
-          window.scrollTo({ top, behavior: 'smooth' });
-        }
-      } else {
-        el.setAttribute('href', CAL_URL);
-        el.setAttribute('target', '_blank');
-        el.setAttribute('rel', 'noopener');
-      }
-    });
-  });
-
   /* ---------- Scroll reveal (subtle) ---------- */
   if ('IntersectionObserver' in window) {
     const reveal = new IntersectionObserver(
@@ -174,7 +153,7 @@
       },
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('.area, .approach__item, .fees__list li, .profile__facts > div').forEach((el) => {
+    document.querySelectorAll('.area, .fees__list li, .profile__facts > div').forEach((el) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(16px)';
       el.style.transition = 'opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)';

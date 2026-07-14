@@ -12,7 +12,15 @@ export const CONTACT = {
 	phoneSchema: '+56-9-7549-5927',
 	whatsapp: 'https://wa.me/56975495927',
 	linkedin: 'https://cl.linkedin.com/in/tamaralopezg',
+	instagram: 'https://www.instagram.com/humanalegal.abogados/',
+	tiktok: 'https://www.tiktok.com/@humana.legal4',
 };
+
+/*
+ * URL de Calendly. Vacía = el bloque "Agendar en calendario" no se muestra
+ * (antes aparecía un placeholder "pendiente de URL" visible al público).
+ */
+export const CALENDLY_URL = '';
 
 /*
  * Umami self-hosted: dejar src y websiteId vacíos desactiva el script

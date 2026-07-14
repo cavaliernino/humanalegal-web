@@ -1,41 +1,52 @@
 ---
 import { content, getLocale } from '../i18n/content';
+import { strokeIcons } from '../icons';
 
 const locale = getLocale(Astro.currentLocale);
 const { hero } = content[locale];
 ---
 
 <section class="hero">
-	<div class="container hero__inner">
-		<div class="hero__eyebrow">
-			<span class="dot"></span>
-			<span>{hero.eyebrow}</span>
+	<div class="container hero__layout">
+		<div class="hero__content">
+			<div class="hero__eyebrow">
+				<span class="dot"></span>
+				<span>{hero.eyebrow}</span>
+			</div>
+
+			<h1 class="hero__title" set:html={hero.titleHtml} />
+
+			<p class="hero__lede" set:html={hero.ledeHtml} />
+
+			<div class="hero__cta">
+				<a href={hero.ctaPrimary.href} class="btn btn--primary">{hero.ctaPrimary.label}</a>
+				<a href={hero.ctaGhost.href} class="btn btn--ghost">{hero.ctaGhost.label}</a>
+			</div>
 		</div>
 
-		<h1 class="hero__title" set:html={hero.titleHtml} />
-
-		<p class="hero__lede">{hero.lede}</p>
-
-		<div class="hero__cta">
-			<a href={hero.ctaPrimary.href} class="btn btn--primary">{hero.ctaPrimary.label}</a>
-			<a href={hero.ctaGhost.href} class="btn btn--ghost">{hero.ctaGhost.label}</a>
-		</div>
-
-		<div class="hero__meta">
-			{
-				hero.meta.map((item) => (
-					<div>
-						<strong>{item.num}</strong> {item.text}
-					</div>
-				))
-			}
-		</div>
-	</div>
-
-	<div class="hero__aside" aria-hidden="true">
-		<div class="hero__sig">
-			<span>{hero.sig.name}</span>
-			<span class="hero__sig-sub">{hero.sig.sub}</span>
-		</div>
+		<nav class="hero__rail" aria-label={hero.rail.aria}>
+			<ul>
+				{
+					hero.rail.items.map((item) => (
+						<li>
+							<a href={item.href}>
+								<span class="hero__rail-icon" aria-hidden="true">
+									<svg
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="1.4"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										set:html={strokeIcons[item.icon]}
+									/>
+								</span>
+								<span class="hero__rail-label">{item.label}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
 	</div>
 </section>
