@@ -114,6 +114,63 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
+## Hardening — TLS 1.3 (nota A+ en SSL Labs)
+
+SSL Labs daba **A-** con el aviso *"This server does not support TLS 1.3"*.
+
+**Causa (no obvia):** el vhost de humanalegal SÍ pide `TLSv1.2 TLSv1.3` (vía
+`include /etc/letsencrypt/options-ssl-nginx.conf`), pero en un socket `:443`
+compartido por varios vhosts **el `default_server` fija las versiones de TLS de
+todo el socket**. Nuestro `default_server` es `000-default`, que no declara
+`ssl_protocols`, así que hereda el del bloque `http{}` de
+`/etc/nginx/nginx.conf` — y en Debian/Ubuntu ese viene como
+`TLSv1 TLSv1.1 TLSv1.2` (sin 1.3). nginx arranca el handshake en el contexto del
+default y el callback SNI sólo puede *restringir* protocolos, nunca reactivar uno
+ya deshabilitado: por eso TLS 1.3 quedaba apagado para todos los sitios del socket.
+
+```bash
+# 1) Diagnóstico: ver TODAS las líneas ssl_protocols efectivas y de dónde salen
+sudo nginx -T 2>/dev/null | grep -n ssl_protocols
+sudo grep -rn ssl_protocols /etc/nginx/ /etc/letsencrypt/
+#   Culpable típico en /etc/nginx/nginx.conf (http{}):  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+# 2) Habilitar TLS 1.3 a nivel http{} (cubre el default_server y de paso
+#    elimina TLS 1.0/1.1 obsoletos de todo el server)
+sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+sudo sed -i -E 's/^([[:space:]]*)ssl_protocols .*/\1ssl_protocols TLSv1.2 TLSv1.3;/' /etc/nginx/nginx.conf
+
+# 3) Validar y recargar
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+**Verificación:**
+```bash
+# TLS 1.3 ahora negocia → debe imprimir: New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+echo | openssl s_client -connect www.humanalegal.cl:443 -servername www.humanalegal.cl -tls1_3 2>/dev/null | grep "New,"
+# TLS 1.2 sigue OK (compatibilidad)
+echo | openssl s_client -connect www.humanalegal.cl:443 -servername www.humanalegal.cl -tls1_2 2>/dev/null | grep "New,"
+# Redirect HTTP→HTTPS (apex y www) — ambos 301 a https://
+curl -sI http://humanalegal.cl/     | grep -iE '^HTTP|^location'
+curl -sI http://www.humanalegal.cl/ | grep -iE '^HTTP|^location'
+```
+
+Luego re-correr los tests **con caché limpia** (ambos sitios cachean resultados viejos):
+- SSL Labs: `https://www.ssllabs.com/ssltest/analyze.html?d=www.humanalegal.cl&clearCache=on` → esperado **A+**
+- Security Headers: re-enviar `https://www.humanalegal.cl` en https://securityheaders.com → esperado **A**
+
+> **PQC** (*"does not support PQC key exchange"*): es informativo y **no baja la
+> nota**. El intercambio post-cuántico (X25519MLKEM768) requiere OpenSSL 3.5+
+> (abril 2025) enlazado con nginx; el OpenSSL del sistema (3.0.x) no lo trae.
+> Omitir hasta actualizar el SO.
+
+**Rollback:**
+```bash
+sudo cp /etc/nginx/nginx.conf.bak /etc/nginx/nginx.conf
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+---
+
 ## Re-deploy de contenido (después de editar el sitio)
 
 ```bash
