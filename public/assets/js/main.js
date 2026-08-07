@@ -153,7 +153,7 @@
       },
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('.area, .fees__list li, .profile__facts > div').forEach((el) => {
+    document.querySelectorAll('.area, .process__step, .profile__facts > div').forEach((el) => {
       el.style.opacity = '0';
       el.style.transform = 'translateY(16px)';
       el.style.transition = 'opacity 700ms cubic-bezier(0.22,1,0.36,1), transform 700ms cubic-bezier(0.22,1,0.36,1)';

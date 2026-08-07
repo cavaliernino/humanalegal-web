@@ -148,6 +148,7 @@ export const content: Record<Locale, SiteContent> = {
 			menuAria: 'Navegación principal',
 			links: [
 				{ href: '#areas', label: 'Áreas' },
+				{ href: '#dimensiones', label: 'Otras áreas' },
 				{ href: '#perfil', label: 'Perfil' },
 				{ href: '#proceso', label: 'Proceso' },
 				{ href: '/blog/', label: 'Blog' },
@@ -155,6 +156,7 @@ export const content: Record<Locale, SiteContent> = {
 			],
 			mobileLinks: [
 				{ href: '#areas', label: 'Áreas de práctica' },
+				{ href: '#dimensiones', label: 'Otras áreas' },
 				{ href: '#perfil', label: 'Perfil profesional' },
 				{ href: '#proceso', label: 'Proceso' },
 				{ href: '/blog/', label: 'Blog' },
@@ -342,9 +344,12 @@ export const content: Record<Locale, SiteContent> = {
 				area: 'Área de interés',
 				areaPlaceholder: 'Seleccione un área',
 				areaOptions: [
-					{ value: 'residencias', label: 'Residencias y nacionalización' },
-					{ value: 'defensa', label: 'Defensa administrativa o judicial' },
-					{ value: 'ddhh', label: 'Protección y derechos humanos' },
+					{ value: 'administrativo', label: 'Procedimientos administrativos' },
+					{ value: 'judicial', label: 'Defensa judicial migratoria' },
+					{ value: 'penal', label: 'Derecho penal' },
+					{ value: 'civil', label: 'Derecho civil' },
+					{ value: 'familia', label: 'Derecho de familia' },
+					{ value: 'laboral', label: 'Derecho laboral' },
 					{ value: 'empresas', label: 'Empresas e instituciones' },
 					{ value: 'otro', label: 'Otro / No estoy seguro' },
 				],
@@ -410,6 +415,7 @@ export const content: Record<Locale, SiteContent> = {
 			menuAria: 'Main navigation',
 			links: [
 				{ href: '#practice', label: 'Practice' },
+				{ href: '#dimensions', label: 'Other areas' },
 				{ href: '#profile', label: 'Profile' },
 				{ href: '#process', label: 'Process' },
 				{ href: '/en/blog/', label: 'Blog' },
@@ -417,6 +423,7 @@ export const content: Record<Locale, SiteContent> = {
 			],
 			mobileLinks: [
 				{ href: '#practice', label: 'Practice areas' },
+				{ href: '#dimensions', label: 'Other areas' },
 				{ href: '#profile', label: 'Profile' },
 				{ href: '#process', label: 'Process' },
 				{ href: '/en/blog/', label: 'Blog' },
@@ -604,9 +611,12 @@ export const content: Record<Locale, SiteContent> = {
 				area: 'Area of interest',
 				areaPlaceholder: 'Select an area',
 				areaOptions: [
-					{ value: 'residency', label: 'Residency & naturalization' },
-					{ value: 'defense', label: 'Administrative or judicial defense' },
-					{ value: 'humanrights', label: 'Protection & human rights' },
+					{ value: 'administrative', label: 'Administrative proceedings' },
+					{ value: 'judicial', label: 'Judicial immigration defense' },
+					{ value: 'criminal', label: 'Criminal law' },
+					{ value: 'civil', label: 'Civil law' },
+					{ value: 'family', label: 'Family law' },
+					{ value: 'labor', label: 'Labor law' },
 					{ value: 'business', label: 'Companies & institutions' },
 					{ value: 'other', label: 'Other / Not sure' },
 				],

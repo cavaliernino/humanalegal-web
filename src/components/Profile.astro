@@ -9,13 +9,15 @@ const { profile } = content[locale];
 	<div class="container profile__grid">
 		<div class="profile__media">
 			<div class="profile__photo">
-				<img
-					src="/assets/images/tamara-2.jpg"
-					alt={profile.photoAlt}
-					loading="lazy"
-					width="600"
-					height="750"
-				/>
+				<div class="profile__duotone">
+					<img
+						src="/assets/images/tamara-2.jpg"
+						alt={profile.photoAlt}
+						loading="lazy"
+						width="600"
+						height="750"
+					/>
+				</div>
 			</div>
 			<div class="profile__caption">
 				<span class="profile__name">{profile.name}</span>

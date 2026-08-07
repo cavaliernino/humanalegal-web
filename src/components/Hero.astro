@@ -1,18 +1,17 @@
 ---
 import { content, getLocale } from '../i18n/content';
-import { strokeIcons } from '../icons';
 
 const locale = getLocale(Astro.currentLocale);
 const { hero } = content[locale];
+
+// Numerales romanos del índice de dimensiones (reemplazan a los iconos).
+const romans = ['i.', 'ii.', 'iii.', 'iv.', 'v.', 'vi.'];
 ---
 
 <section class="hero">
 	<div class="container hero__layout">
 		<div class="hero__content">
-			<div class="hero__eyebrow">
-				<span class="dot"></span>
-				<span>{hero.eyebrow}</span>
-			</div>
+			<p class="hero__eyebrow">{hero.eyebrow}</p>
 
 			<h1 class="hero__title" set:html={hero.titleHtml} />
 
@@ -25,21 +24,14 @@ const { hero } = content[locale];
 		</div>
 
 		<nav class="hero__rail" aria-label={hero.rail.aria}>
+			<p class="hero__rail-head">{hero.rail.aria}</p>
 			<ul>
 				{
-					hero.rail.items.map((item) => (
+					hero.rail.items.map((item, index) => (
 						<li>
 							<a href={item.href}>
-								<span class="hero__rail-icon" aria-hidden="true">
-									<svg
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="1.4"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										set:html={strokeIcons[item.icon]}
-									/>
+								<span class="hero__rail-num" aria-hidden="true">
+									{romans[index]}
 								</span>
 								<span class="hero__rail-label">{item.label}</span>
 							</a>

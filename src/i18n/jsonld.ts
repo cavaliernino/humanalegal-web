@@ -4,7 +4,19 @@
  * la EN, un LegalService simple. Datos biográficos verificados con Tamara.
  */
 import { CONTACT, SITE_URL } from '../config';
-import type { Locale } from './content';
+import { content, type Locale } from './content';
+
+/* Catálogo de ofertas derivado de content.ts (áreas + dimensiones), para que
+ * el JSON-LD nunca quede desincronizado del copy real de la página. */
+const { areas: areasEs, dimensions: dimensionsEs } = content.es;
+const offerCatalog = (name: string, items: string[]) => ({
+	'@type': 'OfferCatalog',
+	name,
+	itemListElement: items.map((itemName) => ({
+		'@type': 'Offer',
+		itemOffered: { '@type': 'Service', name: itemName },
+	})),
+});
 
 const legalServiceEs = {
 	'@type': 'LegalService',
@@ -50,53 +62,17 @@ const legalServiceEs = {
 		'Expulsión y Abandono',
 		'Refugio',
 		'Derechos Humanos',
+		'Derecho Civil',
+		'Derecho de Familia',
+		'Derecho Laboral',
+		'Derecho Penal',
 	],
 	hasOfferCatalog: {
 		'@type': 'OfferCatalog',
 		name: 'Servicios jurídicos',
-		itemListElement: [
-			{
-				'@type': 'OfferCatalog',
-				name: 'Residencias y nacionalización',
-				itemListElement: [
-					'Residencia temporal: reunificación familiar, actividades remuneradas, razones humanitarias',
-					'Residencia definitiva',
-					'Nacionalización y reconocimiento de ciudadanía',
-					'Asesoría migratoria a empresas, inversionistas e instituciones',
-				].map((name) => ({
-					'@type': 'Offer',
-					itemOffered: { '@type': 'Service', name },
-				})),
-			},
-			{
-				'@type': 'OfferCatalog',
-				name: 'Defensa administrativa y judicial',
-				itemListElement: [
-					'Recursos administrativos y descargos en procedimientos sancionatorios',
-					'Reclamo de multas por irregularidad migratoria',
-					'Recursos de protección por rechazo o archivo de solicitudes',
-					'Recursos de amparo frente a expulsión y abandono',
-					'Recursos de reclamación judicial',
-				].map((name) => ({
-					'@type': 'Offer',
-					itemOffered: { '@type': 'Service', name },
-				})),
-			},
-			{
-				'@type': 'OfferCatalog',
-				name: 'Protección y derechos humanos',
-				itemListElement: [
-					'Solicitudes de refugio',
-					'Víctimas de trata y tráfico de personas',
-					'Casos con enfoque de género',
-					'Niñez y adolescencia migrante',
-					'Litigio estratégico',
-				].map((name) => ({
-					'@type': 'Offer',
-					itemOffered: { '@type': 'Service', name },
-				})),
-			},
-		],
+		itemListElement: [...areasEs.items, ...dimensionsEs.items].map((item) =>
+			offerCatalog(item.title, item.list),
+		),
 	},
 };
 
@@ -106,7 +82,7 @@ const personEs = {
 	name: 'Tamara López González',
 	jobTitle: 'Abogada · Fundadora de Humana Legal',
 	url: `${SITE_URL}/`,
-	image: `${SITE_URL}/assets/images/tamara.jpg`,
+	image: `${SITE_URL}/assets/images/tamara-2.jpg`,
 	alumniOf: [
 		{ '@type': 'CollegeOrUniversity', name: 'Universidad de Las Américas' },
 		{ '@type': 'CollegeOrUniversity', name: 'Pontificia Universidad Católica de Chile' },

@@ -1,22 +1,18 @@
 ---
+/*
+ * Línea de valores del estudio: banda fija entre filetes bajo el hero.
+ * (Reemplaza al marquee animado de la v1 — rediseño "editorial cálido", jul 2026.)
+ */
 import { content, getLocale } from '../i18n/content';
 
 const locale = getLocale(Astro.currentLocale);
 const { marquee } = content[locale];
-
-// La pista se duplica para que la animación de scroll sea continua.
-const track = [...marquee, ...marquee];
 ---
 
-<div class="marquee" aria-hidden="true">
-	<div class="marquee__track">
-		{
-			track.map((value) => (
-				<>
-					<span>{value}</span>
-					<span>✦</span>
-				</>
-			))
-		}
+<div class="values">
+	<div class="container">
+		<ul>
+			{marquee.map((value) => <li>{value}</li>)}
+		</ul>
 	</div>
 </div>

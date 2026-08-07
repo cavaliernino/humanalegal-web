@@ -3,25 +3,37 @@ import { content, getLocale } from '../i18n/content';
 
 const locale = getLocale(Astro.currentLocale);
 const { process } = content[locale];
+
+// Los títulos vienen como "i. Diagnóstico" — se separa el numeral del nombre.
+const split = (title: string) => {
+	const [num, ...rest] = title.split(' ');
+	return { num, name: rest.join(' ') };
+};
 ---
 
-<section class="fees section" id={process.id}>
-	<div class="container fees__grid">
-		<div>
+<section class="process section" id={process.id}>
+	<div class="container">
+		<div class="section__head">
 			<span class="section__label">{process.label}</span>
 			<h2 class="section__title" set:html={process.titleHtml} />
-			<p class="fees__lede">{process.lede}</p>
+			<p class="process__lede">{process.lede}</p>
 		</div>
 
-		<ul class="fees__list">
+		<div class="process__grid">
 			{
-				process.steps.map((step) => (
-					<li>
-						<strong>{step.title}</strong>
-						<span>{step.text}</span>
-					</li>
-				))
+				process.steps.map((step) => {
+					const { num, name } = split(step.title);
+					return (
+						<div class="process__step">
+							<span class="process__num" aria-hidden="true">
+								{num}
+							</span>
+							<h3>{name}</h3>
+							<p>{step.text}</p>
+						</div>
+					);
+				})
 			}
-		</ul>
+		</div>
 	</div>
 </section>
