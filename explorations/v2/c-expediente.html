@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="only light" />
+<title>Humana Legal [Prototipo C — Expediente]</title>
+<meta name="description" content="Prototipo de rediseño — Opción C: expediente / editorial dura. Grilla estricta, numeración y serif reservado para lo humano." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Manrope:wght@300..700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,300..500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #f6f3ec;
+    --paper-2: #efeadf;
+    --ink: #161412;
+    --ink-soft: #4c4843;
+    --ink-mute: #7a756d;
+    --timbre: #8a2c2c;        /* rojo fiscal: el único acento */
+    --timbre-deep: #6b1f1f;
+    --line: rgba(22, 20, 18, 0.85);
+    --hairline: rgba(22, 20, 18, 0.18);
+    --display: "Archivo", system-ui, sans-serif;
+    --body: "Manrope", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+    --serif: "Fraunces", Georgia, serif;
+    --container: 1280px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: only light; }
+  body { font-family: var(--body); background: var(--paper); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: var(--timbre); }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+
+  .display {
+    font-family: var(--display);
+    font-weight: 640;
+    font-stretch: 108%;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+  /* El único serif del sitio: lo humano, en itálica */
+  .humano { font-family: var(--serif); font-style: italic; font-weight: 380; text-transform: none; letter-spacing: -0.01em; color: var(--timbre); }
+
+  .mono { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Cabecera de sección tipo carátula de expediente */
+  .file-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 2px solid var(--line);
+    padding: 0.55rem 0 0;
+    margin-bottom: clamp(2rem, 4vw, 3.2rem);
+  }
+  .file-head .mono b { color: var(--timbre); font-weight: 500; }
+  .file-head .mono + .mono { color: var(--ink-mute); }
+  @media (max-width: 640px) { .file-head .mono + .mono { display: none; } }
+
+  .btn {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 1.7rem;
+    border: 1px solid var(--line);
+    transition: background 0.2s, color 0.2s;
+    cursor: pointer;
+    background: none;
+  }
+  .btn--fill { background: var(--ink); color: var(--paper); }
+  .btn--fill:hover { background: var(--timbre); border-color: var(--timbre); color: var(--paper); }
+  .btn--line:hover { background: var(--ink); color: var(--paper); }
+  .btn--timbre { background: var(--timbre); border-color: var(--timbre); color: var(--paper); }
+  .btn--timbre:hover { background: var(--timbre-deep); color: var(--paper); }
+
+  /* ---------- Nav ---------- */
+  .nav { position: sticky; top: 0; z-index: 50; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .nav__inner { display: flex; align-items: stretch; justify-content: space-between; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .nav__brand { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 0; }
+  .nav__brand strong { font-family: var(--display); font-weight: 700; font-stretch: 110%; text-transform: uppercase; font-size: 1.05rem; letter-spacing: 0.01em; }
+  .nav__brand .mono { color: var(--ink-mute); }
+  @media (max-width: 700px) { .nav__brand .mono { display: none; } }
+  .nav__links { display: flex; align-items: center; gap: 1.5rem; font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  @media (max-width: 900px) { .nav__links { display: none; } }
+  .nav__cta { display: flex; align-items: center; border-left: 1px solid var(--line); padding-left: 1.5rem; margin-left: 0.4rem; align-self: stretch; }
+  .nav__cta a { color: var(--timbre); font-weight: 500; }
+
+  /* ---------- Hero ---------- */
+  .hero { border-bottom: 1px solid var(--line); }
+  .hero__meta { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--hairline); color: var(--ink-mute); flex-wrap: wrap; }
+  .hero__layout { display: grid; grid-template-columns: 1.6fr 1fr; }
+  @media (max-width: 920px) { .hero__layout { grid-template-columns: 1fr; } }
+  .hero__main { padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem); padding-right: clamp(1.5rem, 4vw, 4rem); }
+  .hero__title { font-size: clamp(3.2rem, 8.4vw, 7.6rem); margin-bottom: 2.2rem; }
+  .hero__title .humano { font-size: 0.94em; }
+  .hero__lede { font-size: clamp(1rem, 1.3vw, 1.14rem); color: var(--ink-soft); max-width: 36em; margin-bottom: 2.6rem; }
+  .hero__lede strong { color: var(--ink); font-weight: 600; }
+  .hero__cta { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
+  /* Índice tipo escrito judicial con líneas de puntos */
+  .indice { border-left: 1px solid var(--line); padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem) clamp(1.5rem, 3.5vw, 3rem); }
+  @media (max-width: 920px) { .indice { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 2rem; } }
+  .indice h2 { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 1.6rem; color: var(--ink-mute); }
+  .indice ol { list-style: none; counter-reset: idx; }
+  .indice li { counter-increment: idx; margin-bottom: 0.15rem; }
+  .indice a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    padding: 0.55rem 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .indice a::before { content: counter(idx, decimal-leading-zero); font-family: var(--mono); font-size: 0.72rem; color: var(--timbre); }
+  .indice a::after { content: ""; flex: 1; border-bottom: 1px dotted var(--ink-mute); transform: translateY(-4px); }
+  .indice a:hover::after { border-bottom-color: var(--timbre); }
+
+  /* ---------- Valores: franja seca ---------- */
+  .values { border-bottom: 1px solid var(--line); background: var(--paper-2); }
+  .values ul { list-style: none; display: flex; flex-wrap: wrap; }
+  .values li {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 1.1rem 0; color: var(--ink-soft);
+  }
+  .values li + li::before { content: "/"; margin: 0 1.8rem; color: var(--timbre); }
+
+  /* ---------- Secciones ---------- */
+  section { padding: clamp(3.5rem, 7vw, 6rem) 0; }
+  .section-title { font-size: clamp(2rem, 4.4vw, 3.4rem); margin-bottom: 1rem; max-width: 18em; }
+  .lede { color: var(--ink-soft); max-width: 44em; font-size: 1.02rem; }
+
+  /* Áreas: filas de tabla-expediente */
+  .areas__rows { border-top: 2px solid var(--line); margin-top: 2.6rem; }
+  .row {
+    display: grid;
+    grid-template-columns: 90px 1.1fr 1.5fr;
+    gap: clamp(1.2rem, 3vw, 2.6rem);
+    padding: 2.2rem 0;
+    border-bottom: 1px solid var(--hairline);
+    transition: background 0.2s;
+  }
+  @media (max-width: 860px) { .row { grid-template-columns: 60px 1fr; } .row__list { grid-column: 2; } }
+  .row:hover { background: rgba(22, 20, 18, 0.03); }
+  .row__num { font-family: var(--mono); font-size: 0.8rem; color: var(--timbre); padding-top: 0.4rem; }
+  .row h3 { font-family: var(--display); font-weight: 640; font-stretch: 106%; text-transform: uppercase; font-size: 1.35rem; letter-spacing: 0; line-height: 1.1; margin-bottom: 0.6rem; }
+  .row__head p { color: var(--ink-soft); font-size: 0.94rem; }
+  .row__list ul { list-style: none; border-left: 1px solid var(--hairline); padding-left: 1.4rem; }
+  .row__list li { position: relative; font-size: 0.92rem; color: var(--ink-soft); padding: 0.4rem 0; }
+  .row__list li::before { content: "§"; position: absolute; left: -1.42rem; color: var(--timbre); font-size: 0.8em; top: 0.55em; }
+
+  /* Dimensiones: columnas con regla */
+  .dims { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .dims__grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 2.8rem; border-top: 2px solid var(--line); }
+  @media (max-width: 920px) { .dims__grid { grid-template-columns: 1fr; } }
+  .dim { padding: 2rem 2rem 2.2rem 0; border-right: 1px solid var(--hairline); }
+  .dim + .dim { padding-left: 2rem; }
+  .dim:last-child { border-right: none; padding-right: 0; }
+  @media (max-width: 920px) { .dim { border-right: none; border-bottom: 1px solid var(--hairline); padding: 1.8rem 0; } .dim + .dim { padding-left: 0; } .dim:last-child { border-bottom: none; } }
+  .dim .mono { color: var(--timbre); display: block; margin-bottom: 0.9rem; }
+  .dim h3 { font-family: var(--display); font-weight: 640; text-transform: uppercase; font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .dim p { color: var(--ink-soft); font-size: 0.93rem; margin-bottom: 1rem; }
+  .dim ul { list-style: none; }
+  .dim li { font-size: 0.9rem; color: var(--ink-soft); padding: 0.32rem 0; border-top: 1px dotted var(--hairline); }
+  .dim li:first-child { border-top: none; }
+
+  /* Perfil: ficha profesional */
+  .profile__layout { display: grid; grid-template-columns: 300px 1fr; gap: clamp(2rem, 5vw, 4.5rem); margin-top: 2.8rem; align-items: start; }
+  @media (max-width: 860px) { .profile__layout { grid-template-columns: 1fr; max-width: 620px; } }
+  .ficha-foto { position: relative; border: 1px solid var(--line); padding: 10px; background: #fff; }
+  .ficha-foto img { filter: grayscale(1) contrast(1.06); }
+  .ficha-foto .stamp {
+    position: absolute;
+    bottom: 110px;
+    right: -18px;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--timbre);
+    border: 2px solid var(--timbre);
+    padding: 0.5rem 0.8rem;
+    transform: rotate(-8deg);
+    background: rgba(246, 243, 236, 0.85);
+    opacity: 0.9;
+  }
+  .ficha-foto figcaption { padding-top: 0.8rem; }
+  .ficha-foto figcaption strong { font-family: var(--display); text-transform: uppercase; font-weight: 680; font-size: 0.95rem; display: block; }
+  .ficha-foto figcaption span { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+  .profile__body > p { color: var(--ink-soft); margin-bottom: 1.1em; }
+  .profile__body > p:first-of-type { color: var(--ink); font-size: 1.05rem; }
+  .facts { margin-top: 2.2rem; border-top: 2px solid var(--line); }
+  .facts > div { display: grid; grid-template-columns: 210px 1fr; gap: 1rem; padding: 0.9rem 0; border-bottom: 1px solid var(--hairline); }
+  @media (max-width: 640px) { .facts > div { grid-template-columns: 1fr; gap: 0.1rem; } }
+  .facts dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--timbre); padding-top: 0.3em; }
+  .facts dd { font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* Proceso: 01→03 seco */
+  .process__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); margin-top: 2.8rem; }
+  @media (max-width: 860px) { .process__grid { grid-template-columns: 1fr; max-width: 540px; } }
+  .step { border-top: 3px solid var(--line); padding-top: 1.2rem; }
+  .step .mono { color: var(--timbre); display: block; margin-bottom: 0.8rem; }
+  .step h3 { font-family: var(--display); font-weight: 660; text-transform: uppercase; font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .step p { color: var(--ink-soft); font-size: 0.94rem; }
+
+  /* Contacto: formulario legal */
+  .contact { border-top: 1px solid var(--line); background: var(--paper-2); }
+  .contact .section-title .humano { font-size: 0.95em; }
+  .contact__layout { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(2rem, 5vw, 4.5rem); margin-top: 2.6rem; align-items: start; }
+  @media (max-width: 900px) { .contact__layout { grid-template-columns: 1fr; } }
+  .contact__details { border-top: 2px solid var(--line); }
+  .contact__details > div { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--hairline); }
+  .contact__details dt { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--timbre); padding-top: 0.3em; }
+  .contact__details dd { font-size: 0.95rem; color: var(--ink-soft); }
+  .form { border: 1px solid var(--line); background: var(--paper); padding: clamp(1.8rem, 3.5vw, 2.6rem); position: relative; }
+  .form__head { display: flex; justify-content: space-between; border-bottom: 2px solid var(--line); padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
+  .form__head .mono b { color: var(--timbre); font-weight: 500; }
+  .form label { display: block; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin: 1.4rem 0 0.25rem; }
+  .form input, .form select, .form textarea {
+    width: 100%; font: inherit; font-size: 0.98rem; color: var(--ink);
+    background: transparent; border: none; border-bottom: 1px solid var(--line);
+    border-radius: 0; padding: 0.45rem 0.05rem; outline: none;
+  }
+  .form input:focus, .form select:focus, .form textarea:focus { border-bottom-color: var(--timbre); box-shadow: 0 1px 0 var(--timbre); }
+  .form textarea { min-height: 96px; resize: vertical; }
+  .form .btn { margin-top: 1.9rem; }
+
+  /* Footer */
+  footer { background: var(--ink); color: var(--paper); }
+  .footer__top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 2.6rem 0 2rem; border-bottom: 1px solid rgba(246,243,236,0.15); flex-wrap: wrap; }
+  .footer__wordmark { font-family: var(--display); font-weight: 700; font-stretch: 110%; text-transform: uppercase; font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: 0; }
+  .footer__wordmark .humano { color: #d98f8f; }
+  .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; padding: 2.2rem 0; }
+  @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr; } }
+  footer h4 { font-family: var(--mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,243,236,0.5); margin-bottom: 0.9rem; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 0.4rem; font-size: 0.9rem; color: rgba(246,243,236,0.75); }
+  footer a:hover { color: #d98f8f; }
+  .footer__tagline { font-family: var(--serif); font-style: italic; font-size: 1.3rem; line-height: 1.4; color: rgba(246,243,236,0.8); }
+  .footer__bottom { padding: 1.2rem 0 1.6rem; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,243,236,0.45); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+
+  .proto-badge {
+    position: fixed; bottom: 14px; left: 14px; z-index: 1000;
+    background: var(--timbre); color: var(--paper);
+    font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.45rem 0.85rem;
+    opacity: 0.94;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-badge">Prototipo C · Expediente</div>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#">
+      <strong>Humana Legal</strong>
+      <span class="mono">— Derecho migratorio · DDHH</span>
+    </a>
+    <div class="nav__links">
+      <a href="#areas">01 Áreas</a>
+      <a href="#dimensiones">02 Otras áreas</a>
+      <a href="#perfil">03 Perfil</a>
+      <a href="#proceso">04 Proceso</a>
+      <a href="#">05 Blog</a>
+      <span class="nav__cta"><a href="#contacto">+ Agendar</a></span>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <div class="hero__meta mono">
+      <span>Estudio jurídico</span>
+      <span>Región de Valparaíso — 33.0472° S, 71.6127° W</span>
+      <span>Online en todo Chile</span>
+    </div>
+    <div class="hero__layout">
+      <div class="hero__main">
+        <h1 class="display hero__title">El derecho,<br /><span class="humano">más humano.</span></h1>
+        <p class="hero__lede"><strong>Asesoría y litigación en derecho migratorio.</strong> Acompañamos a personas migrantes y empresas en las distintas dimensiones del derecho: administrativo, civil, familia, laboral y penal. Abordamos cada caso con todas las herramientas legales que sean necesarias.</p>
+        <div class="hero__cta">
+          <a href="#contacto" class="btn btn--timbre">Agendar primera consulta</a>
+          <a href="#areas" class="btn btn--line">Áreas de práctica ↓</a>
+        </div>
+      </div>
+      <nav class="indice" aria-label="Dimensiones del derecho">
+        <h2>Índice — Dimensiones del derecho</h2>
+        <ol>
+          <li><a href="#administrativo">Derecho administrativo</a></li>
+          <li><a href="#civil">Derecho civil</a></li>
+          <li><a href="#familia">Derecho de familia</a></li>
+          <li><a href="#laboral">Derecho laboral</a></li>
+          <li><a href="#penal">Derecho penal</a></li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="values">
+  <div class="container">
+    <ul>
+      <li>Rigor técnico</li>
+      <li>Trato humano</li>
+      <li>Estrategia</li>
+      <li>Confidencialidad</li>
+      <li>Vocación</li>
+    </ul>
+  </div>
+</div>
+
+<section id="areas">
+  <div class="container">
+    <div class="file-head">
+      <span class="mono"><b>01 /</b> Áreas de práctica</span>
+      <span class="mono">Exp. Humana Legal — fj. 1</span>
+    </div>
+    <h2 class="display section-title">Derecho migratorio, <span class="humano">de principio a fin.</span></h2>
+    <div class="areas__rows">
+      <article class="row" id="administrativo">
+        <span class="row__num">i.</span>
+        <div class="row__head">
+          <h3>Procedimientos administrativos</h3>
+          <p>Acompañamiento integral en permisos migratorios, desde la postulación hasta su obtención.</p>
+        </div>
+        <div class="row__list">
+          <ul>
+            <li>Residencia temporal y definitiva: reunificación familiar, trabajo, razones humanitarias</li>
+            <li>Nacionalización y reconocimiento de ciudadanía</li>
+            <li>Solicitudes de refugio</li>
+            <li>Asesoría a empresas e instituciones que contratan personas extranjeras</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row">
+        <span class="row__num">ii.</span>
+        <div class="row__head">
+          <h3>Defensa judicial migratoria</h3>
+          <p>Representación frente a resoluciones adversas, sanciones y órdenes que afectan la permanencia en Chile.</p>
+        </div>
+        <div class="row__list">
+          <ul>
+            <li>Recursos administrativos, descargos y reclamo de multas migratorias</li>
+            <li>Recursos de protección y reclamación judicial por rechazo o archivo de solicitudes</li>
+            <li>Recursos de amparo frente a órdenes de expulsión y abandono</li>
+          </ul>
+        </div>
+      </article>
+      <article class="row" id="penal">
+        <span class="row__num">iii.</span>
+        <div class="row__head">
+          <h3>Derecho penal</h3>
+          <p>Defensa de personas migrantes en situación de vulnerabilidad, con enfoque de derechos humanos.</p>
+        </div>
+        <div class="row__list">
+          <ul>
+            <li>Trata de personas, violencia de género, niñez y adolescencia migrante</li>
+            <li>Litigio estratégico y asesoría a organizaciones</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="dims" id="dimensiones">
+  <div class="container">
+    <div class="file-head" style="border-top-color: transparent; padding-top: 0;">
+      <span class="mono"><b>02 /</b> Otras áreas</span>
+      <span class="mono">Exp. Humana Legal — fj. 2</span>
+    </div>
+    <h2 class="display section-title">Un mismo caso, <span class="humano">varias dimensiones.</span></h2>
+    <p class="lede">La vida de una persona rara vez cabe en una sola rama del derecho. Estas áreas complementan nuestro trabajo migratorio y también se atienden de manera independiente.</p>
+    <div class="dims__grid">
+      <article class="dim" id="civil">
+        <span class="mono">a)</span>
+        <h3>Derecho civil</h3>
+        <p>Asesoría y representación en las relaciones jurídicas entre particulares.</p>
+        <ul>
+          <li>Contratos: redacción, revisión y cumplimiento</li>
+          <li>Arrendamientos y conflictos entre particulares</li>
+          <li>Indemnización de perjuicios y cobranza</li>
+        </ul>
+      </article>
+      <article class="dim" id="familia">
+        <span class="mono">b)</span>
+        <h3>Derecho de familia</h3>
+        <p>Acompañamiento cercano en los asuntos que tocan la vida familiar, también cuando cruzan fronteras.</p>
+        <ul>
+          <li>Pensiones de alimentos y compensación económica</li>
+          <li>Cuidado personal y relación directa y regular</li>
+          <li>Divorcios y acuerdos de unión civil</li>
+        </ul>
+      </article>
+      <article class="dim" id="laboral">
+        <span class="mono">c)</span>
+        <h3>Derecho laboral</h3>
+        <p>Defensa de los derechos del trabajador y asesoría a quienes contratan personas extranjeras.</p>
+        <ul>
+          <li>Despido injustificado y autodespido</li>
+          <li>Tutela de derechos fundamentales del trabajador</li>
+          <li>Contratación de personas extranjeras y cumplimiento laboral</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="perfil">
+  <div class="container">
+    <div class="file-head">
+      <span class="mono"><b>03 /</b> Ficha profesional</span>
+      <span class="mono">Exp. Humana Legal — fj. 3</span>
+    </div>
+    <h2 class="display section-title">Trayectoria interdisciplinaria, <span class="humano">vocación de servicio.</span></h2>
+    <div class="profile__layout">
+      <figure class="ficha-foto">
+        <img src="tamara-formal.jpg" alt="Tamara López González, abogada de Humana Legal" />
+        <span class="stamp">Humana Legal</span>
+        <figcaption>
+          <strong>Tamara López González</strong>
+          <span>Abogada</span>
+        </figcaption>
+      </figure>
+      <div class="profile__body">
+        <p>Soy abogada, Licenciada en Ciencias Jurídicas, con especialización práctica en derecho migratorio y extranjería. Complemento esta base técnica con más de 15 años de experiencia tanto en el sector público como privado, gestionando proyectos en las áreas de Asuntos Públicos y Regulatorios.</p>
+        <p>Mi interés por los derechos humanos, en general, no comenzó en el aula: se formó trabajando con comunidades, en distintas instancias de voluntariado, como dirigente estudiantil y en mis estudios en el extranjero donde viví la experiencia de ser migrante junto a amigos y compañeros de toda Hispanoamérica. En Chile, pude vivir el servicio público en instancias de gobierno, tanto del Ministerio del Interior como del Ministerio de Justicia, lo que profundizó aún más mi compromiso social.</p>
+        <p>Hoy cuento con las herramientas jurídicas para seguir trabajando en lo que siempre me ha importado: que el derecho funcione para las personas. Esa es la razón de ser de Humana Legal.</p>
+        <dl class="facts">
+          <div><dt>Formación jurídica</dt><dd>Licenciada en Ciencias Jurídicas, con distinción máxima · Premio a la excelencia académica «Rector Mario Albornoz Galdámez» y mejor alumna de la promoción</dd></div>
+          <div><dt>Formación previa</dt><dd>Periodista, Pontificia Universidad Católica de Chile · Magíster en Comunicación Política, Universidad de Chile · Diplomados en Georgetown University (GCL) y FLACSO Chile</dd></div>
+          <div><dt>Formación continua</dt><dd>Debido proceso en procedimientos administrativos, Centro de Formación de la Corte Interamericana de Derechos Humanos (2026)</dd></div>
+          <div><dt>Experiencia</dt><dd>Asesora de la Dirección Nacional y jefa de la Unidad de Estudios, SENAME · Práctica profesional en la Unidad de Migrantes, CAJ Valparaíso</dd></div>
+          <div><dt>Idiomas</dt><dd>Español (nativo) · Inglés (avanzado)</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" style="padding-top: 0;">
+  <div class="container">
+    <div class="file-head">
+      <span class="mono"><b>04 /</b> Proceso</span>
+      <span class="mono">Exp. Humana Legal — fj. 4</span>
+    </div>
+    <h2 class="display section-title">Cómo trabajamos, <span class="humano">paso a paso.</span></h2>
+    <p class="lede">Un método claro en cada caso: usted siempre sabrá en qué etapa estamos y por qué.</p>
+    <div class="process__grid">
+      <div class="step">
+        <span class="mono">Etapa 01</span>
+        <h3>Diagnóstico</h3>
+        <p>Sesión inicial para entender los hechos, revisar los antecedentes y planificar una estrategia con objetivos y plazos.</p>
+      </div>
+      <div class="step">
+        <span class="mono">Etapa 02</span>
+        <h3>Ejecución</h3>
+        <p>Implementación de las acciones legales y/o administrativas que permitan una defensa eficaz de sus derechos, con una mirada interdisciplinaria y táctica.</p>
+      </div>
+      <div class="step">
+        <span class="mono">Etapa 03</span>
+        <h3>Seguimiento</h3>
+        <p>Acompañamos de inicio a fin, no solo hasta la dictación de una sentencia judicial o resolución administrativa, sino hasta su cumplimiento efectivo, entregando tranquilidad y seguridad frente a las dudas de todo el proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="container">
+    <div class="file-head" style="border-top-color: transparent; padding-top: 0;">
+      <span class="mono"><b>05 /</b> Contacto</span>
+      <span class="mono">Respuesta en 24 h hábiles</span>
+    </div>
+    <h2 class="display section-title">Conversemos <span class="humano">sobre su caso.</span></h2>
+    <p class="lede">Escriba, llame o agende directamente: respondemos dentro de 24 horas hábiles. Contamos con modalidades pro bono y tarifas diferenciadas.</p>
+    <div class="contact__layout">
+      <dl class="contact__details">
+        <div><dt>Correo</dt><dd>contacto@humanalegal.cl</dd></div>
+        <div><dt>WhatsApp</dt><dd>Iniciar conversación →</dd></div>
+        <div><dt>Horario</dt><dd>Lunes a viernes · 09:00 — 18:00</dd></div>
+        <div><dt>Zonas</dt><dd>Región de Valparaíso (presencial) · Todo Chile (online)</dd></div>
+      </dl>
+      <form class="form" onsubmit="return false">
+        <div class="form__head">
+          <span class="mono"><b>Formulario</b> de primera consulta</span>
+          <span class="mono">F-01</span>
+        </div>
+        <label>01 — Nombre completo</label>
+        <input type="text" />
+        <label>02 — Correo electrónico</label>
+        <input type="email" />
+        <label>03 — Área de interés</label>
+        <select><option>Seleccione un área</option></select>
+        <label>04 — Cuéntenos brevemente su caso</label>
+        <textarea></textarea>
+        <button class="btn btn--timbre" type="submit">Enviar mensaje ⟶</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer__top">
+      <span class="footer__wordmark">Humana <span class="humano">Legal</span></span>
+      <span class="mono" style="color: rgba(246,243,236,0.5);">Valparaíso, Chile — est. 2026</span>
+    </div>
+    <div class="footer__grid">
+      <p class="footer__tagline">El derecho, más humano.<br />Por Tamara López González, abogada.</p>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#areas">Áreas</a></li>
+          <li><a href="#perfil">Perfil</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+        <ul>
+          <li><a href="#administrativo">Procedimientos administrativos</a></li>
+          <li><a href="#areas">Defensa judicial migratoria</a></li>
+          <li><a href="#penal">Derecho penal</a></li>
+          <li><a href="#dimensiones">Civil, familia y laboral</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>Humana Legal · Tamara López González. Todos los derechos reservados.</span>
+      <span>Política de privacidad / English</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

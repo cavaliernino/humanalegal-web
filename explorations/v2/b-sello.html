@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="only dark" />
+<title>Humana Legal [Prototipo B — Sello clásico oscuro]</title>
+<meta name="description" content="Prototipo de rediseño — Opción B: sello clásico oscuro. Identidad del banner: carbón, burdeo y filetes dorados." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --carbon: #17120f;
+    --carbon-2: #211a16;
+    --burdeo: #4a1420;
+    --burdeo-deep: #350e17;
+    --burdeo-light: #6b2231;
+    --crema: #f4efe6;
+    --crema-soft: rgba(244, 239, 230, 0.72);
+    --crema-mute: rgba(244, 239, 230, 0.5);
+    --oro: #b39155;
+    --oro-bright: #cfae6e;
+    --oro-line: rgba(179, 145, 85, 0.45);
+    --ink: #141414;
+    --line-dark: rgba(244, 239, 230, 0.12);
+    --line-light: rgba(20, 20, 20, 0.14);
+    --display: "Fraunces", Georgia, serif;
+    --body: "Manrope", system-ui, sans-serif;
+    --container: 1200px;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; color-scheme: only dark; }
+  body { font-family: var(--body); background: var(--carbon); color: var(--crema); line-height: 1.65; overflow-x: hidden; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; transition: color 0.3s; }
+  a:hover { color: var(--oro-bright); }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 380; line-height: 1.06; letter-spacing: -0.015em; font-optical-sizing: auto; }
+  h1 em, h2 em { font-style: italic; font-weight: 320; color: var(--oro-bright); }
+
+  /* Etiqueta ceremonial: versalitas doradas entre guiones */
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--oro);
+    margin-bottom: 1.6rem;
+  }
+  .label::before, .label.label--center::after { content: ""; width: 2.4rem; height: 1px; background: var(--oro-line); }
+  .label--center { justify-content: center; }
+
+  /* Filete doble dorado */
+  .filete { border: none; height: 7px; border-top: 1px solid var(--oro-line); border-bottom: 1px solid var(--oro-line); background: none; margin: 0; }
+  .filete--diamond { position: relative; overflow: visible; }
+  .filete--diamond::after {
+    content: "⟡";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -54%);
+    color: var(--oro);
+    background: inherit;
+    font-size: 0.8rem;
+    padding: 0 0.8rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2.1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .btn--burdeo { background: var(--burdeo); color: var(--crema); border: 1px solid var(--burdeo-light); }
+  .btn--burdeo:hover { background: var(--burdeo-light); color: var(--crema); }
+  .btn--gold { border: 1px solid var(--oro-line); color: var(--oro-bright); }
+  .btn--gold:hover { border-color: var(--oro-bright); background: rgba(179,145,85,0.08); color: var(--oro-bright); }
+
+  /* ---------- Nav ---------- */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(23, 18, 15, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-dark); }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem var(--gutter); max-width: var(--container); margin: 0 auto; }
+  .nav__brand { display: flex; align-items: center; gap: 0.9rem; }
+  .monogram {
+    width: 44px; height: 44px;
+    border: 1px solid var(--oro-line);
+    display: grid; place-items: center;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: var(--oro-bright);
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .monogram::after { content: ""; position: absolute; inset: 3px; border: 1px solid rgba(179,145,85,0.22); }
+  .nav__brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+  .nav__brand-text strong { font-family: var(--display); font-weight: 480; font-size: 1.1rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav__brand-text span { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oro); }
+  .nav__links { display: flex; gap: 1.7rem; font-size: 0.88rem; font-weight: 500; align-items: center; color: var(--crema-soft); }
+  @media (max-width: 900px) { .nav__links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; text-align: center; padding: clamp(4.5rem, 10vw, 8.5rem) 0 clamp(3.5rem, 7vw, 6rem); }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(107, 34, 49, 0.35), transparent 70%),
+      radial-gradient(ellipse 45% 40% at 85% 100%, rgba(179, 145, 85, 0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .hero__inner { position: relative; max-width: 880px; margin: 0 auto; }
+  .hero .monogram { width: 74px; height: 74px; font-size: 2rem; margin: 0 auto 2.2rem; }
+  .hero__kicker {
+    display: flex; align-items: center; justify-content: center; gap: 1.1rem;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.34em; text-transform: uppercase;
+    color: var(--oro); margin-bottom: 2rem;
+  }
+  .hero__kicker::before, .hero__kicker::after { content: ""; width: 3rem; height: 1px; background: var(--oro-line); }
+  .hero__title { font-size: clamp(3rem, 7.5vw, 6.4rem); margin-bottom: 2rem; }
+  .hero__lede { font-size: clamp(1.02rem, 1.35vw, 1.18rem); color: var(--crema-soft); max-width: 44em; margin: 0 auto 2.6rem; }
+  .hero__cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3.4rem; }
+
+  /* Rail como índice ceremonial horizontal */
+  .rail { border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
+  .rail ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; }
+  .rail li { border-right: 1px solid var(--line-dark); }
+  .rail li:first-child { border-left: 1px solid var(--line-dark); }
+  .rail a {
+    display: block; padding: 1rem 1.5rem;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--crema-mute);
+    transition: color 0.3s, background 0.3s;
+  }
+  .rail a:hover { color: var(--oro-bright); background: rgba(179,145,85,0.05); }
+  @media (max-width: 900px) { .rail li { border: none !important; } .rail a { padding: 0.5rem 0.9rem; } }
+
+  /* ---------- Valores: banda con diamantes (sin marquee) ---------- */
+  .values { padding: 2rem 0; background: var(--burdeo-deep); border-top: 1px solid var(--oro-line); border-bottom: 1px solid var(--oro-line); }
+  .values ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem 0; }
+  .values li {
+    font-family: var(--display); font-style: italic; font-size: 1.05rem; color: var(--crema-soft);
+    display: flex; align-items: center;
+  }
+  .values li + li::before { content: "⟡"; font-style: normal; font-size: 0.7rem; color: var(--oro); margin: 0 1.6rem; }
+
+  /* ---------- Secciones ---------- */
+  section { padding: clamp(4rem, 8vw, 7rem) 0; }
+  .section-title { font-size: clamp(2.1rem, 4.6vw, 3.5rem); margin-bottom: 1.2rem; }
+  .lede { color: var(--crema-soft); max-width: 44em; font-size: 1.03rem; }
+
+  /* Áreas: paneles burdeo con esquinas de certificado */
+  .areas__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 3.2rem; }
+  @media (max-width: 980px) { .areas__grid { grid-template-columns: 1fr; max-width: 580px; } }
+  .panel {
+    position: relative;
+    background: linear-gradient(160deg, var(--burdeo) 0%, var(--burdeo-deep) 100%);
+    border: 1px solid rgba(107, 34, 49, 0.8);
+    padding: 2.6rem 2rem 2.2rem;
+  }
+  /* esquinas doradas de certificado */
+  .corners::before, .corners::after,
+  .corners .c::before, .corners .c::after {
+    content: "";
+    position: absolute;
+    width: 18px; height: 18px;
+    border-color: var(--oro);
+    border-style: solid;
+    opacity: 0.75;
+  }
+  .corners::before { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+  .corners::after  { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+  .corners .c::before { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+  .corners .c::after  { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+  .panel .num { font-family: var(--display); font-style: italic; font-size: 2.2rem; color: var(--oro-bright); line-height: 1; display: block; margin-bottom: 1rem; }
+  .panel h3 { font-size: 1.35rem; margin-bottom: 0.7rem; }
+  .panel p { color: var(--crema-soft); font-size: 0.94rem; margin-bottom: 1.2rem; }
+  .panel ul { list-style: none; border-top: 1px solid rgba(244,239,230,0.14); padding-top: 1.1rem; }
+  .panel li { position: relative; padding-left: 1.35em; font-size: 0.88rem; margin-bottom: 0.6em; color: var(--crema-soft); }
+  .panel li::before { content: "⟡"; position: absolute; left: 0; top: 0.1em; font-size: 0.72em; color: var(--oro); }
+
+  /* Dimensiones: carbón con filetes */
+  .dims { background: var(--carbon-2); border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); }
+  .dims__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 3rem; border: 1px solid var(--oro-line); }
+  @media (max-width: 980px) { .dims__grid { grid-template-columns: 1fr; } }
+  .dim { padding: 2.4rem 2rem; border-right: 1px solid var(--oro-line); transition: background 0.3s; }
+  .dim:last-child { border-right: none; }
+  @media (max-width: 980px) { .dim { border-right: none; border-bottom: 1px solid var(--oro-line); } .dim:last-child { border-bottom: none; } }
+  .dim:hover { background: rgba(179,145,85,0.05); }
+  .dim h3 { font-size: 1.3rem; margin-bottom: 0.65rem; }
+  .dim h3 em { font-style: italic; color: var(--oro-bright); }
+  .dim p { color: var(--crema-soft); font-size: 0.93rem; margin-bottom: 1rem; }
+  .dim ul { list-style: none; }
+  .dim li { position: relative; padding-left: 1.3em; font-size: 0.88rem; margin-bottom: 0.55em; color: var(--crema-mute); }
+  .dim li::before { content: "—"; position: absolute; left: 0; color: var(--oro); }
+
+  /* Perfil: retrato enmarcado con doble filete */
+  .profile__layout { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2.5rem, 6vw, 5.5rem); align-items: start; margin-top: 2.8rem; }
+  @media (max-width: 920px) { .profile__layout { grid-template-columns: 1fr; max-width: 640px; } }
+  .portrait {
+    position: relative;
+    padding: 16px;
+    border: 1px solid var(--oro-line);
+    max-width: 400px;
+  }
+  .portrait::before { content: ""; position: absolute; inset: 7px; border: 1px solid rgba(179,145,85,0.25); pointer-events: none; z-index: 1; }
+  .portrait__img { background: var(--burdeo); overflow: hidden; }
+  .portrait__img img { filter: grayscale(1) contrast(1.1) brightness(0.98); mix-blend-mode: screen; opacity: 0.94; }
+  .portrait figcaption { text-align: center; padding-top: 1.1rem; }
+  .portrait figcaption strong { font-family: var(--display); font-weight: 450; font-size: 1.15rem; display: block; }
+  .portrait figcaption span { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--oro); }
+  .profile__body p { color: var(--crema-soft); margin-bottom: 1.1em; }
+  .profile__body p:first-of-type { color: var(--crema); font-size: 1.07rem; }
+  .facts { margin-top: 2.4rem; border-top: 1px solid var(--oro-line); }
+  .facts > div { display: grid; grid-template-columns: 200px 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line-dark); }
+  @media (max-width: 640px) { .facts > div { grid-template-columns: 1fr; gap: 0.15rem; } }
+  .facts dt { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--oro); padding-top: 0.2em; }
+  .facts dd { font-size: 0.92rem; color: var(--crema-soft); }
+
+  /* Proceso: línea vertical dorada con medallones */
+  .process__steps { max-width: 760px; margin: 3.2rem auto 0; position: relative; }
+  .process__steps::before { content: ""; position: absolute; left: 33px; top: 10px; bottom: 10px; width: 1px; background: var(--oro-line); }
+  .step { position: relative; padding: 0 0 2.8rem 6.2rem; }
+  .step:last-child { padding-bottom: 0; }
+  .medallion {
+    position: absolute; left: 0; top: 0;
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    border: 1px solid var(--oro-line);
+    background: var(--carbon);
+    display: grid; place-items: center;
+    font-family: var(--display); font-style: italic; font-size: 1.4rem; color: var(--oro-bright);
+  }
+  .medallion::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; border: 1px solid rgba(179,145,85,0.25); }
+  .step h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+  .step p { color: var(--crema-soft); font-size: 0.97rem; max-width: 40em; }
+
+  /* Contacto: vuelta al papel crema (contrapunto cálido) */
+  .contact { background: var(--crema); color: var(--ink); }
+  .contact .label { color: var(--burdeo-light); }
+  .contact .label::before { background: rgba(74, 20, 32, 0.4); }
+  .contact .section-title em { color: var(--burdeo-light); }
+  .contact .lede { color: rgba(20,20,20,0.65); }
+  .contact__layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(2.5rem, 6vw, 5rem); margin-top: 2.6rem; align-items: start; }
+  @media (max-width: 920px) { .contact__layout { grid-template-columns: 1fr; } }
+  .contact__details dt { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--burdeo-light); margin-top: 1.3rem; }
+  .contact__details dd { font-size: 1rem; color: rgba(20,20,20,0.7); }
+  .card {
+    position: relative;
+    background: #fdf9f0;
+    border: 1px solid rgba(74, 20, 32, 0.25);
+    padding: 2.6rem 2.3rem;
+  }
+  .card.corners::before, .card.corners::after, .card.corners .c::before, .card.corners .c::after { border-color: var(--burdeo-light); }
+  .card label { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(20,20,20,0.55); margin: 1.3rem 0 0.3rem; }
+  .card input, .card select, .card textarea {
+    width: 100%; font: inherit; font-size: 0.98rem; color: var(--ink);
+    background: transparent; border: none; border-bottom: 1px solid rgba(20,20,20,0.35);
+    border-radius: 0; padding: 0.5rem 0.1rem; outline: none;
+  }
+  .card input:focus, .card select:focus, .card textarea:focus { border-bottom-color: var(--burdeo-light); }
+  .card textarea { min-height: 100px; resize: vertical; }
+  .card .btn { margin-top: 2rem; background: var(--burdeo); color: var(--crema); border: none; cursor: pointer; }
+  .card .btn:hover { background: var(--burdeo-light); }
+
+  /* Footer */
+  footer { background: var(--burdeo-deep); color: var(--crema); padding: 0; }
+  .footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; padding: 3.5rem 0 2.5rem; }
+  @media (max-width: 860px) { .footer__grid { grid-template-columns: 1fr; } }
+  .footer__tagline { font-family: var(--display); font-style: italic; font-size: 1.5rem; line-height: 1.35; color: var(--crema-soft); }
+  footer h4 { font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--oro); margin-bottom: 1rem; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 0.45rem; font-size: 0.9rem; color: var(--crema-soft); }
+  .footer__bottom { border-top: 1px solid rgba(244,239,230,0.12); padding: 1.4rem 0 1.8rem; font-size: 0.78rem; color: var(--crema-mute); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; }
+
+  .proto-badge {
+    position: fixed; bottom: 14px; left: 14px; z-index: 1000;
+    background: var(--oro); color: var(--carbon);
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0.45rem 0.85rem; border-radius: 2px;
+    opacity: 0.94;
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-badge">Prototipo B · Sello oscuro</div>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#">
+      <span class="monogram">HL</span>
+      <span class="nav__brand-text">
+        <strong>Humana Legal</strong>
+        <span>Estudio jurídico</span>
+      </span>
+    </a>
+    <div class="nav__links">
+      <a href="#areas">Áreas</a>
+      <a href="#dimensiones">Otras áreas</a>
+      <a href="#perfil">Perfil</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#">Blog</a>
+      <a href="#contacto" class="btn btn--burdeo" style="padding:0.6rem 1.3rem; font-size:0.75rem;">Agendar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container hero__inner">
+    <span class="monogram">HL</span>
+    <p class="hero__kicker">Estudio jurídico · Región de Valparaíso</p>
+    <h1 class="hero__title">El derecho,<br /><em>más humano.</em></h1>
+    <p class="hero__lede">Asesoría y litigación en derecho migratorio. Acompañamos a personas migrantes y empresas en las distintas dimensiones del derecho: administrativo, civil, familia, laboral y penal. Abordamos cada caso con todas las herramientas legales que sean necesarias.</p>
+    <div class="hero__cta">
+      <a href="#contacto" class="btn btn--burdeo">Agendar primera consulta</a>
+      <a href="#areas" class="btn btn--gold">Conocer áreas de práctica</a>
+    </div>
+  </div>
+  <nav class="rail" aria-label="Dimensiones del derecho">
+    <ul>
+      <li><a href="#administrativo">Administrativo</a></li>
+      <li><a href="#civil">Civil</a></li>
+      <li><a href="#familia">Familia</a></li>
+      <li><a href="#laboral">Laboral</a></li>
+      <li><a href="#penal">Penal</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="values">
+  <div class="container">
+    <ul>
+      <li>Rigor técnico</li>
+      <li>Trato humano</li>
+      <li>Estrategia</li>
+      <li>Confidencialidad</li>
+      <li>Vocación</li>
+    </ul>
+  </div>
+</div>
+
+<section id="areas">
+  <div class="container">
+    <span class="label">Áreas de práctica</span>
+    <h2 class="section-title">Derecho migratorio, <em>de principio a fin.</em></h2>
+    <div class="areas__grid">
+      <article class="panel corners" id="administrativo">
+        <span class="c"></span>
+        <span class="num">i.</span>
+        <h3>Procedimientos administrativos</h3>
+        <p>Acompañamiento integral en permisos migratorios, desde la postulación hasta su obtención.</p>
+        <ul>
+          <li>Residencia temporal y definitiva: reunificación familiar, trabajo, razones humanitarias</li>
+          <li>Nacionalización y reconocimiento de ciudadanía</li>
+          <li>Solicitudes de refugio</li>
+          <li>Asesoría a empresas e instituciones que contratan personas extranjeras</li>
+        </ul>
+      </article>
+      <article class="panel corners">
+        <span class="c"></span>
+        <span class="num">ii.</span>
+        <h3>Defensa judicial migratoria</h3>
+        <p>Representación frente a resoluciones adversas, sanciones y órdenes que afectan la permanencia en Chile.</p>
+        <ul>
+          <li>Recursos administrativos, descargos y reclamo de multas migratorias</li>
+          <li>Recursos de protección y reclamación judicial por rechazo o archivo de solicitudes</li>
+          <li>Recursos de amparo frente a órdenes de expulsión y abandono</li>
+        </ul>
+      </article>
+      <article class="panel corners" id="penal">
+        <span class="c"></span>
+        <span class="num">iii.</span>
+        <h3>Derecho penal</h3>
+        <p>Defensa de personas migrantes en situación de vulnerabilidad, con enfoque de derechos humanos.</p>
+        <ul>
+          <li>Trata de personas, violencia de género, niñez y adolescencia migrante</li>
+          <li>Litigio estratégico y asesoría a organizaciones</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="dims" id="dimensiones">
+  <div class="container">
+    <span class="label">Otras áreas</span>
+    <h2 class="section-title">Un mismo caso, <em>varias dimensiones.</em></h2>
+    <p class="lede">La vida de una persona rara vez cabe en una sola rama del derecho. Estas áreas complementan nuestro trabajo migratorio y también se atienden de manera independiente.</p>
+    <div class="dims__grid">
+      <article class="dim" id="civil">
+        <h3>Derecho <em>civil</em></h3>
+        <p>Asesoría y representación en las relaciones jurídicas entre particulares.</p>
+        <ul>
+          <li>Contratos: redacción, revisión y cumplimiento</li>
+          <li>Arrendamientos y conflictos entre particulares</li>
+          <li>Indemnización de perjuicios y cobranza</li>
+        </ul>
+      </article>
+      <article class="dim" id="familia">
+        <h3>Derecho de <em>familia</em></h3>
+        <p>Acompañamiento cercano en los asuntos que tocan la vida familiar, también cuando cruzan fronteras.</p>
+        <ul>
+          <li>Pensiones de alimentos y compensación económica</li>
+          <li>Cuidado personal y relación directa y regular</li>
+          <li>Divorcios y acuerdos de unión civil</li>
+        </ul>
+      </article>
+      <article class="dim" id="laboral">
+        <h3>Derecho <em>laboral</em></h3>
+        <p>Defensa de los derechos del trabajador y asesoría a quienes contratan personas extranjeras.</p>
+        <ul>
+          <li>Despido injustificado y autodespido</li>
+          <li>Tutela de derechos fundamentales del trabajador</li>
+          <li>Contratación de personas extranjeras y cumplimiento laboral</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="perfil">
+  <div class="container">
+    <span class="label">Perfil profesional</span>
+    <h2 class="section-title">Trayectoria interdisciplinaria,<br /><em>vocación de servicio.</em></h2>
+    <div class="profile__layout">
+      <figure class="portrait">
+        <div class="portrait__img"><img src="tamara-formal.jpg" alt="Tamara López González, abogada de Humana Legal" /></div>
+        <figcaption>
+          <strong>Tamara López González</strong>
+          <span>Abogada</span>
+        </figcaption>
+      </figure>
+      <div class="profile__body">
+        <p>Soy abogada, Licenciada en Ciencias Jurídicas, con especialización práctica en derecho migratorio y extranjería. Complemento esta base técnica con más de 15 años de experiencia tanto en el sector público como privado, gestionando proyectos en las áreas de Asuntos Públicos y Regulatorios.</p>
+        <p>Mi interés por los derechos humanos, en general, no comenzó en el aula: se formó trabajando con comunidades, en distintas instancias de voluntariado, como dirigente estudiantil y en mis estudios en el extranjero donde viví la experiencia de ser migrante junto a amigos y compañeros de toda Hispanoamérica. En Chile, pude vivir el servicio público en instancias de gobierno, tanto del Ministerio del Interior como del Ministerio de Justicia, lo que profundizó aún más mi compromiso social.</p>
+        <p>Hoy cuento con las herramientas jurídicas para seguir trabajando en lo que siempre me ha importado: que el derecho funcione para las personas. Esa es la razón de ser de Humana Legal.</p>
+        <dl class="facts">
+          <div><dt>Formación jurídica</dt><dd>Licenciada en Ciencias Jurídicas, con distinción máxima · Premio a la excelencia académica «Rector Mario Albornoz Galdámez» y mejor alumna de la promoción</dd></div>
+          <div><dt>Formación previa</dt><dd>Periodista, Pontificia Universidad Católica de Chile · Magíster en Comunicación Política, Universidad de Chile · Diplomados en Georgetown University (GCL) y FLACSO Chile</dd></div>
+          <div><dt>Formación continua</dt><dd>Debido proceso en procedimientos administrativos, Centro de Formación de la Corte Interamericana de Derechos Humanos (2026)</dd></div>
+          <div><dt>Experiencia</dt><dd>Asesora de la Dirección Nacional y jefa de la Unidad de Estudios, SENAME · Práctica profesional en la Unidad de Migrantes, CAJ Valparaíso</dd></div>
+          <div><dt>Idiomas</dt><dd>Español (nativo) · Inglés (avanzado)</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="filete filete--diamond" style="background: var(--carbon);" />
+
+<section id="proceso">
+  <div class="container">
+    <div style="text-align:center;">
+      <span class="label label--center">Proceso</span>
+      <h2 class="section-title">Cómo trabajamos, <em>paso a paso.</em></h2>
+      <p class="lede" style="margin: 0 auto;">Un método claro en cada caso: usted siempre sabrá en qué etapa estamos y por qué.</p>
+    </div>
+    <div class="process__steps">
+      <div class="step">
+        <div class="medallion">i</div>
+        <h3>Diagnóstico</h3>
+        <p>Sesión inicial para entender los hechos, revisar los antecedentes y planificar una estrategia con objetivos y plazos.</p>
+      </div>
+      <div class="step">
+        <div class="medallion">ii</div>
+        <h3>Ejecución</h3>
+        <p>Implementación de las acciones legales y/o administrativas que permitan una defensa eficaz de sus derechos, con una mirada interdisciplinaria y táctica.</p>
+      </div>
+      <div class="step">
+        <div class="medallion">iii</div>
+        <h3>Seguimiento</h3>
+        <p>Acompañamos de inicio a fin, no solo hasta la dictación de una sentencia judicial o resolución administrativa, sino hasta su cumplimiento efectivo, entregando tranquilidad y seguridad frente a las dudas de todo el proceso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="container">
+    <span class="label">Contacto</span>
+    <h2 class="section-title">Conversemos <em>sobre su caso.</em></h2>
+    <p class="lede">Escriba, llame o agende directamente: respondemos dentro de 24 horas hábiles. Contamos con modalidades pro bono y tarifas diferenciadas.</p>
+    <div class="contact__layout">
+      <dl class="contact__details">
+        <dt>Correo</dt><dd>contacto@humanalegal.cl</dd>
+        <dt>WhatsApp</dt><dd>Iniciar conversación →</dd>
+        <dt>Horario</dt><dd>Lunes a viernes · 09:00 — 18:00</dd>
+        <dt>Zonas de atención</dt><dd>Región de Valparaíso (presencial) · Todo Chile (online)</dd>
+      </dl>
+      <form class="card corners" onsubmit="return false">
+        <span class="c"></span>
+        <label>Nombre completo</label>
+        <input type="text" />
+        <label>Correo electrónico</label>
+        <input type="email" />
+        <label>Área de interés</label>
+        <select><option>Seleccione un área</option></select>
+        <label>Cuéntenos brevemente su caso</label>
+        <textarea></textarea>
+        <button class="btn" type="submit">Enviar mensaje</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer__grid">
+      <p class="footer__tagline">El derecho, más humano.<br />Por Tamara López González, abogada.</p>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#areas">Áreas</a></li>
+          <li><a href="#perfil">Perfil</a></li>
+          <li><a href="#proceso">Proceso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Áreas</h4>
+        <ul>
+          <li><a href="#administrativo">Procedimientos administrativos</a></li>
+          <li><a href="#areas">Defensa judicial migratoria</a></li>
+          <li><a href="#penal">Derecho penal</a></li>
+          <li><a href="#dimensiones">Civil, familia y laboral</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>Humana Legal · Tamara López González. Todos los derechos reservados.</span>
+      <span>Política de privacidad · English</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

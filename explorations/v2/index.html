@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<meta name="color-scheme" content="only light" />
+<title>Humana Legal — Exploraciones v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #141414; --bone: #f4efe6; --cream: #fdf9f0; --clay: #7a2f2f;
+    --carbon: #17120f; --oro: #b39155; --timbre: #8a2c2c; --paper: #f6f3ec;
+    --line: rgba(20,20,20,0.14);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: only light; }
+  body { font-family: "Manrope", system-ui, sans-serif; background: var(--bone); color: var(--ink); line-height: 1.6; min-height: 100vh; display: grid; place-items: center; padding: 3rem 1.5rem; }
+  .wrap { max-width: 1080px; width: 100%; }
+  h1 { font-family: "Fraunces", serif; font-weight: 400; font-size: clamp(2rem, 5vw, 3.2rem); letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  h1 em { font-style: italic; color: var(--clay); }
+  .sub { color: #6a6a6a; margin-bottom: 3rem; max-width: 52em; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .card--d { border: 1.5px solid var(--ink); }
+  .card--d .swatch { background: var(--bone); color: var(--ink); }
+  .card--d .swatch em { font-style: italic; font-weight: 330; }
+  .card--d .tag { color: var(--ink); }
+  .badge { display: inline-block; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: var(--clay); color: var(--cream); padding: 0.2rem 0.55rem; border-radius: 2px; margin-left: 0.5rem; }
+  .fb { font-size: 0.78rem; color: #8a857d; font-style: italic; margin-top: 0.5rem; }
+  a.card { display: flex; flex-direction: column; text-decoration: none; color: inherit; border: 1px solid var(--line); background: var(--cream); transition: transform 0.25s, box-shadow 0.25s; }
+  a.card:hover { transform: translateY(-5px); box-shadow: 0 14px 34px rgba(20,20,20,0.12); }
+  .swatch { height: 130px; display: flex; align-items: center; justify-content: center; font-family: "Fraunces", serif; font-size: 2.2rem; }
+  .card--a .swatch { background: var(--bone); color: var(--clay); font-style: italic; }
+  .card--b .swatch { background: var(--carbon); color: var(--oro); letter-spacing: 0.1em; }
+  .card--c .swatch { background: var(--paper); color: var(--ink); font-family: "Manrope", sans-serif; font-weight: 800; text-transform: uppercase; font-size: 1.7rem; }
+  .card--c .swatch em { font-family: "Fraunces", serif; font-style: italic; font-weight: 400; color: var(--timbre); text-transform: none; }
+  .body { padding: 1.4rem 1.5rem 1.6rem; border-top: 1px solid var(--line); }
+  .tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clay); }
+  .card--b .tag { color: var(--oro); }
+  .card--c .tag { color: var(--timbre); }
+  h2 { font-family: "Fraunces", serif; font-weight: 450; font-size: 1.35rem; margin: 0.3rem 0 0.5rem; }
+  .body p { font-size: 0.9rem; color: #55504a; }
+  .foot { margin-top: 2.6rem; font-size: 0.8rem; color: #8a857d; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Humana Legal — <em>exploraciones v2</em></h1>
+  <p class="sub">Tres direcciones para despegarse del «look IA» (Fraunces itálica + crema + terracota en su combinación de siempre). Las tres usan el contenido real del sitio y conservan el orden de secciones, para compararlas de igual a igual.</p>
+  <div class="grid">
+    <a class="card card--d" href="d-editorial.html">
+      <div class="swatch">El derecho, <em>más humano.</em></div>
+      <div class="body">
+        <span class="tag">Opción D · síntesis<span class="badge">Nueva</span></span>
+        <h2>Editorial cálido</h2>
+        <p>La respuesta al feedback de A/B/C: esotipo actual intacto, Fraunces y paleta arcilla/hueso, itálica en tinta (no terracota), tarjetas con el hover rescatado, banda oscura solo en perfil y footer. Sin cinta adhesiva, sin dorados, sin fojas.</p>
+      </div>
+    </a>
+    <a class="card card--a" href="a-artesanal.html">
+      <div class="swatch">más humano.</div>
+      <div class="body">
+        <span class="tag">Opción A · evolución</span>
+        <h2>Cálido artesanal</h2>
+        <p>Conserva Fraunces y la paleta arcilla/hueso, pero suma materia: grano de papel, timbres de goma, subrayado a pincel, fichas con cinta adhesiva, sellos de lacre y bordes dibujados a mano.</p>
+        <p class="fb">Feedback: se percibe infantil; se rescata el hover de las tarjetas civil/familia/laboral.</p>
+      </div>
+    </a>
+    <a class="card card--b" href="b-sello.html">
+      <div class="swatch">HL</div>
+      <div class="body">
+        <span class="tag">Opción B · identidad del banner</span>
+        <h2>Sello clásico oscuro</h2>
+        <p>Carbón, burdeo profundo y filetes dorados: la identidad del banner de RRSS llevada a la web. Monograma, esquinas de certificado y contacto en papel crema como contrapunto cálido.</p>
+        <p class="fb">Feedback: buenos colores, pero aún parece plantilla (diseño IA).</p>
+      </div>
+    </a>
+    <a class="card card--c" href="c-expediente.html">
+      <div class="swatch">El derecho, <em>más humano.</em></div>
+      <div class="body">
+        <span class="tag">Opción C · ruptura</span>
+        <h2>Expediente editorial</h2>
+        <p>Grilla dura, numeración de fojas, monoespaciada y rojo fiscal. El serif itálico queda reservado exclusivamente para lo humano: la tensión expediente/persona se vuelve el concepto de marca.</p>
+        <p class="fb">Feedback: se ve muy burocrática.</p>
+      </div>
+    </a>
+  </div>
+  <p class="foot">Prototipos estáticos con noindex · Formularios inactivos · Julio 2026</p>
+</div>
+</body>
+</html>

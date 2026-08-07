@@ -1,0 +1,35 @@
+<!-- @dsCard group="Marca" name="Esotipo" subtitle="Wordmark actual — se mantiene intacto" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="only light">
+<title>Marca — Humana Legal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f4efe6;--ink:#161310;--ink-mute:#8a847b;--clay:#7a2f2f;--clay-light:#a84848;--dark:#1b1613;--hairline:rgba(22,19,16,.16);--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bone);color:var(--ink);padding:2rem;line-height:1.5}
+.panel{border:1px solid var(--hairline);border-radius:2px;padding:2.2rem;display:flex;align-items:baseline;gap:.7rem;margin-bottom:1rem}
+.panel--dark{background:var(--dark)}
+.wordmark{font-family:var(--serif);font-size:1.6rem;font-weight:400;letter-spacing:-.02em;line-height:1}
+.wordmark em{font-style:italic;font-weight:300;color:var(--clay)}
+.panel--dark .wordmark{color:var(--bone)}
+.panel--dark .wordmark em{color:var(--clay-light)}
+.sub{font-size:.72rem;font-weight:600;letter-spacing:.18em;color:var(--ink-mute);text-transform:uppercase;border-left:1px solid var(--hairline);padding-left:.7rem}
+.panel--dark .sub{color:rgba(244,239,230,.55);border-left-color:rgba(244,239,230,.2)}
+.note{font-size:.8rem;color:#5f5a53;max-width:56em;border-top:1px solid var(--hairline);padding-top:.9rem}
+.note b{color:var(--clay)}
+</style>
+</head>
+<body>
+<div class="panel">
+  <span class="wordmark">humana <em>legal</em></span>
+  <span class="sub">Derecho migratorio · DDHH</span>
+</div>
+<div class="panel panel--dark">
+  <span class="wordmark">humana <em>legal</em></span>
+  <span class="sub">Derecho migratorio · DDHH</span>
+</div>
+<p class="note"><b>Invariante de marca:</b> el esotipo actual se mantiene tal cual en la esquina superior izquierda — «humana» en Fraunces romana tinta + «legal» en itálica 300 arcilla, con el subtítulo en versalitas separadas por filete. Sobre fondo oscuro, «legal» pasa a clay-light para conservar contraste.</p>
+</body>
+</html>

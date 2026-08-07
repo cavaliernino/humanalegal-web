@@ -1,0 +1,39 @@
+<!-- @dsCard group="Fundaciones" name="Tipografía" subtitle="Fraunces + Manrope, jerarquía y reglas" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="only light">
+<title>Tipografía — Humana Legal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f4efe6;--ink:#161310;--ink-soft:#5f5a53;--clay:#7a2f2f;--hairline:rgba(22,19,16,.16);--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.5;padding:2rem}
+.row{display:grid;grid-template-columns:190px 1fr;gap:1.2rem;align-items:baseline;padding:1.1rem 0;border-bottom:1px solid var(--hairline)}
+.row:first-child{padding-top:0}
+.tag{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tag code{display:block;font-size:.68rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--clay);margin-top:.2rem}
+.h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.022em;font-optical-sizing:auto}
+.h1 em{font-style:italic;font-weight:330}
+.h2{font-family:var(--serif);font-weight:400;font-size:2.1rem;line-height:1.05;letter-spacing:-.02em}
+.h3{font-family:var(--serif);font-weight:400;font-size:1.35rem}
+.lede{font-size:1.12rem;color:var(--ink-soft);max-width:34em}
+.body{font-size:1rem;color:var(--ink-soft);max-width:38em}
+.label{display:inline-flex;align-items:baseline;gap:.55em;font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--clay)}
+.label::before{content:"§";font-family:var(--serif);font-style:italic;font-size:1.3em;font-weight:400}
+.num{font-family:var(--serif);font-style:italic;font-size:2.2rem;color:var(--clay);line-height:1}
+.note{margin-top:1.3rem;font-size:.8rem;color:var(--ink-soft);max-width:60em}
+.note b{color:var(--clay)}
+</style>
+</head>
+<body>
+<div class="row"><span class="tag">Display / Hero<code>Fraunces 400 · itálica 330 en tinta</code></span><p class="h1">El derecho,<br><em>más humano.</em></p></div>
+<div class="row"><span class="tag">Título de sección<code>clamp(2.1–3.6rem)</code></span><p class="h2">Un mismo caso, <em style="font-weight:330">varias dimensiones.</em></p></div>
+<div class="row"><span class="tag">Título de tarjeta<code>1.35rem</code></span><p class="h3">Procedimientos administrativos</p></div>
+<div class="row"><span class="tag">Lede<code>Manrope 400 · 1.05–1.2rem</code></span><p class="lede">La vida de una persona rara vez cabe en una sola rama del derecho.</p></div>
+<div class="row"><span class="tag">Cuerpo<code>Manrope 400 · 1rem</code></span><p class="body">Acompañamiento integral en permisos migratorios, desde la postulación hasta su obtención.</p></div>
+<div class="row"><span class="tag">Etiqueta de sección<code>0.75rem · tracking 0.18em</code></span><span class="label">Áreas de práctica</span></div>
+<div class="row"><span class="tag">Numeral romano<code>Fraunces itálica · arcilla</code></span><span class="num">ii.</span></div>
+<p class="note"><b>Reglas:</b> la itálica va en tinta, nunca en arcilla (evita el look plantilla-IA). El § de las etiquetas es la única marginalia legal que se conserva — sin metadata de fojas ni monoespaciadas. Sin mayúsculas forzadas en títulos.</p>
+</body>
+</html>

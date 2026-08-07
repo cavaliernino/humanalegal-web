@@ -1,0 +1,82 @@
+<!-- @dsCard group="Componentes" name="Tarjeta de área" subtitle="2 opciones — pasar el mouse: hover a crema (la rescatada)" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="only light">
+<title>Tarjeta de área — Humana Legal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f4efe6;--cream:#fdf9f0;--ink:#161310;--ink-soft:#5f5a53;--clay:#7a2f2f;--hairline:rgba(22,19,16,.16);--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.6;padding:2rem}
+.opt{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--clay);margin:0 0 .8rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-bottom:2rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{border:1px solid var(--ink);border-radius:2px;padding:2.1rem 1.9rem;background:transparent;transition:background .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
+.card:hover{background:var(--cream);transform:translateY(-4px);box-shadow:0 10px 30px rgba(22,19,16,.07)}
+.card .num{font-family:var(--serif);font-style:italic;font-size:2.4rem;color:var(--clay);line-height:1;display:block;margin-bottom:1rem}
+.card h3{font-family:var(--serif);font-weight:400;font-size:1.35rem;letter-spacing:-.02em;margin-bottom:.6rem}
+.card p{color:var(--ink-soft);font-size:.95rem;margin-bottom:1.1rem}
+.card ul{list-style:none;border-top:1px solid var(--hairline);padding-top:1rem}
+.card li{position:relative;padding-left:1.3em;font-size:.9rem;margin-bottom:.5em;color:var(--ink-soft)}
+.card li::before{content:"—";position:absolute;left:0;color:var(--clay)}
+/* Variante 2: crema de base, borde fino, numeral al margen */
+.card--b{background:var(--cream);border:1px solid var(--hairline);display:grid;grid-template-columns:56px 1fr;gap:1rem}
+.card--b:hover{background:var(--cream);border-color:var(--clay);transform:translateY(-4px)}
+.card--b .num{font-size:1.6rem;margin:0;padding-top:.3rem}
+.note{font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--hairline);padding-top:.9rem;max-width:60em}
+.note b{color:var(--clay)}
+</style>
+</head>
+<body>
+<p class="opt">Opción 1 — borde tinta, transparente → crema al hover (recomendada)</p>
+<div class="grid">
+  <article class="card">
+    <span class="num">i.</span>
+    <h3>Procedimientos administrativos</h3>
+    <p>Acompañamiento integral en permisos migratorios, desde la postulación hasta su obtención.</p>
+    <ul>
+      <li>Residencia temporal y definitiva</li>
+      <li>Nacionalización y reconocimiento de ciudadanía</li>
+      <li>Solicitudes de refugio</li>
+    </ul>
+  </article>
+  <article class="card">
+    <span class="num">ii.</span>
+    <h3>Defensa judicial migratoria</h3>
+    <p>Representación frente a resoluciones adversas, sanciones y órdenes que afectan la permanencia en Chile.</p>
+    <ul>
+      <li>Recursos administrativos y descargos</li>
+      <li>Recursos de protección y reclamación judicial</li>
+      <li>Recursos de amparo frente a expulsiones</li>
+    </ul>
+  </article>
+</div>
+<p class="opt">Opción 2 — crema de base, numeral al margen, borde se enciende al hover</p>
+<div class="grid">
+  <article class="card card--b">
+    <span class="num">i.</span>
+    <div>
+      <h3>Procedimientos administrativos</h3>
+      <p>Acompañamiento integral en permisos migratorios, desde la postulación hasta su obtención.</p>
+      <ul>
+        <li>Residencia temporal y definitiva</li>
+        <li>Nacionalización y ciudadanía</li>
+      </ul>
+    </div>
+  </article>
+  <article class="card card--b">
+    <span class="num">ii.</span>
+    <div>
+      <h3>Defensa judicial migratoria</h3>
+      <p>Representación frente a resoluciones adversas, sanciones y órdenes.</p>
+      <ul>
+        <li>Recursos administrativos y descargos</li>
+        <li>Recursos de protección y amparo</li>
+      </ul>
+    </div>
+  </article>
+</div>
+<p class="note"><b>Nota:</b> la interacción transparente→crema es la que Nino rescató de la exploración A; aquí se aplica como lenguaje único para áreas y otras áreas (sin bordes ondulados ni rotaciones). La misma tarjeta funciona sobre bone y sobre bone-warm.</p>
+</body>
+</html>

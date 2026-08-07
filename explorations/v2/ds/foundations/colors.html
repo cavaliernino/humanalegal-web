@@ -1,0 +1,38 @@
+<!-- @dsCard group="Fundaciones" name="Colores" subtitle="Paleta Humana Legal y roles de uso" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="only light">
+<title>Colores — Humana Legal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f4efe6;--bone-warm:#ece5d6;--cream:#fdf9f0;--ink:#161310;--ink-soft:#5f5a53;--clay:#7a2f2f;--clay-deep:#5f1f1f;--clay-light:#a84848;--dark:#1b1613;--hairline:rgba(22,19,16,.16);--serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.5;padding:2rem}
+h1{font-family:var(--serif);font-weight:400;font-size:1.4rem;letter-spacing:-.02em;margin-bottom:1.4rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.9rem}
+.sw{border:1px solid var(--hairline);border-radius:2px;overflow:hidden;background:var(--cream)}
+.sw .chip{height:74px}
+.sw .meta{padding:.6rem .7rem}
+.sw .meta b{display:block;font-size:.8rem}
+.sw .meta code{font-size:.7rem;color:var(--ink-soft)}
+.sw .meta span{display:block;font-size:.68rem;color:var(--ink-soft);margin-top:.2rem}
+.note{margin-top:1.4rem;font-size:.8rem;color:var(--ink-soft);border-top:1px solid var(--hairline);padding-top:.9rem;max-width:60em}
+.note b{color:var(--clay)}
+</style>
+</head>
+<body>
+<h1>Paleta — arcilla y hueso, con banda oscura</h1>
+<div class="grid">
+  <div class="sw"><div class="chip" style="background:#f4efe6"></div><div class="meta"><b>bone</b><code>#f4efe6</code><span>Fondo base</span></div></div>
+  <div class="sw"><div class="chip" style="background:#ece5d6"></div><div class="meta"><b>bone-warm</b><code>#ece5d6</code><span>Bandas alternas</span></div></div>
+  <div class="sw"><div class="chip" style="background:#fdf9f0"></div><div class="meta"><b>cream</b><code>#fdf9f0</code><span>Tarjetas al hover, hoja de formulario</span></div></div>
+  <div class="sw"><div class="chip" style="background:#161310"></div><div class="meta"><b>ink</b><code>#161310</code><span>Texto, bordes de tarjeta, reglas 2px</span></div></div>
+  <div class="sw"><div class="chip" style="background:#1b1613"></div><div class="meta"><b>dark</b><code>#1b1613</code><span>Banda editorial (perfil) y footer</span></div></div>
+  <div class="sw"><div class="chip" style="background:#7a2f2f"></div><div class="meta"><b>clay</b><code>#7a2f2f</code><span>CTA, § etiquetas, numerales, duotono</span></div></div>
+  <div class="sw"><div class="chip" style="background:#5f1f1f"></div><div class="meta"><b>clay-deep</b><code>#5f1f1f</code><span>Hover del CTA</span></div></div>
+  <div class="sw"><div class="chip" style="background:#a84848"></div><div class="meta"><b>clay-light</b><code>#a84848</code><span>Acentos sobre fondo oscuro</span></div></div>
+</div>
+<p class="note"><b>Regla de sobriedad:</b> el arcilla nunca decora palabras del texto — se reserva para lo interactivo (CTA, hovers, enlaces), los numerales romanos y el tratamiento duotono de fotografía. La itálica marca «lo humano» y va siempre en tinta. Así se evita el tic IA de la palabra itálica terracota.</p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!-- @dsCard group="Componentes" name="Botones y enlaces" subtitle="Primario / fantasma / compacto + estados" -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="only light">
+<title>Botones — Humana Legal</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet">
+<style>
+:root{--bone:#f4efe6;--cream:#fdf9f0;--ink:#161310;--ink-soft:#5f5a53;--clay:#7a2f2f;--clay-deep:#5f1f1f;--hairline:rgba(22,19,16,.16);--sans:"Manrope",system-ui,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bone);color:var(--ink);line-height:1.6;padding:2rem}
+.row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding:1.1rem 0;border-bottom:1px solid var(--hairline)}
+.tag{min-width:150px;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.btn{display:inline-block;padding:.95rem 1.9rem;font-weight:600;font-size:.95rem;border-radius:2px;border:1px solid transparent;cursor:pointer;background:none;font-family:inherit;transition:background .3s var(--ease),color .3s var(--ease)}
+.btn--primary{background:var(--clay);color:var(--cream)}
+.btn--primary:hover{background:var(--clay-deep)}
+.btn--ghost{border-color:var(--ink);color:var(--ink)}
+.btn--ghost:hover{background:var(--ink);color:var(--bone)}
+.btn--sm{padding:.55rem 1.2rem;font-size:.85rem}
+.link{font-weight:500;color:var(--ink);text-decoration:none;transition:color .3s}
+.link:hover{color:var(--clay)}
+.note{font-size:.8rem;color:var(--ink-soft);padding-top:.9rem;max-width:56em}
+</style>
+</head>
+<body>
+<div class="row"><span class="tag">Primario</span><button class="btn btn--primary">Agendar primera consulta</button><button class="btn btn--primary" style="background:var(--clay-deep)">hover</button></div>
+<div class="row"><span class="tag">Fantasma</span><button class="btn btn--ghost">Conocer áreas de práctica →</button><button class="btn btn--ghost" style="background:var(--ink);color:var(--bone)">hover</button></div>
+<div class="row"><span class="tag">Compacto (nav)</span><button class="btn btn--primary btn--sm">Agendar</button></div>
+<div class="row"><span class="tag">Enlace</span><a class="link" href="#">Áreas</a><a class="link" href="#" style="color:var(--clay)">hover</a></div>
+<p class="note">Esquinas 2px, sin mayúsculas forzadas ni tracking en botones (el tracking amplio en CTA es otro tic de plantilla). El primario mantiene el arcilla del sitio actual.</p>
+</body>
+</html>
