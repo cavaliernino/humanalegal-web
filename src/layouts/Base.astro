@@ -1,10 +1,26 @@
 ---
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import WaFloat from '../components/WaFloat.astro';
 import { content, getLocale } from '../i18n/content';
 import { getJsonLd } from '../i18n/jsonld';
 import { SITE_URL, UMAMI } from '../config';
+
+/* Cache-busting: nginx sirve /assets con Cache-Control immutable de 30 días y
+ * los archivos no cambian de nombre, así que un deploy dejaba a los visitantes
+ * recurrentes con CSS/JS viejo sobre HTML nuevo. El hash corto del contenido
+ * en la query fuerza el refetch exactamente cuando el archivo cambia. */
+/* Se resuelve desde la raíz del proyecto (cwd del build), no desde
+ * import.meta.url: tras el bundling este código corre desde dist/.prerender. */
+const assetVersion = (publicPath: string) =>
+	createHash('md5')
+		.update(readFileSync(`${process.cwd()}/public${publicPath}`))
+		.digest('hex')
+		.slice(0, 8);
+const cssVersion = assetVersion('/assets/css/styles.css');
+const jsVersion = assetVersion('/assets/js/main.js');
 
 const locale = getLocale(Astro.currentLocale);
 const c = content[locale];
@@ -92,7 +108,7 @@ const jsonLdStr = JSON.stringify(jsonLd, null, 2);
 		<link rel="alternate" type="application/rss+xml" title="Humana Legal — Blog"
 			href={locale === 'es' ? '/blog/rss.xml' : '/en/blog/rss.xml'} />
 
-		<link rel="stylesheet" href="/assets/css/styles.css" />
+		<link rel="stylesheet" href={`/assets/css/styles.css?v=${cssVersion}`} />
 
 		<script type="application/ld+json" set:html={jsonLdStr} />
 	</head>
@@ -102,7 +118,7 @@ const jsonLdStr = JSON.stringify(jsonLd, null, 2);
 		<Footer />
 		<WaFloat />
 
-		<script src="/assets/js/main.js" defer is:inline></script>
+		<script src={`/assets/js/main.js?v=${jsVersion}`} defer is:inline></script>
 		{
 			UMAMI.src && UMAMI.websiteId && (
 				<script defer src={UMAMI.src} data-website-id={UMAMI.websiteId} is:inline />
