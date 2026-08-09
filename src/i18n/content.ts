@@ -43,11 +43,10 @@ interface SiteContent {
 		ledeHtml: string;
 		ctaPrimary: Link;
 		ctaGhost: Link;
-		/* Rail de dimensiones del derecho (espejo del banner de RRSS). */
+		/* Índice de dimensiones del derecho (espejo del banner de RRSS). */
 		rail: {
 			aria: string;
 			items: {
-				icon: 'building' | 'globe' | 'contract' | 'family' | 'briefcase' | 'scale';
 				label: string;
 				href: string;
 			}[];
@@ -61,7 +60,7 @@ interface SiteContent {
 		/* El id opcional de cada tarjeta sirve de ancla para el rail del hero. */
 		items: { id?: string; num: string; title: string; desc: string; list: string[] }[];
 	};
-	/* Áreas complementarias (civil, familia, laboral), destino de los ítems del rail. */
+	/* Áreas complementarias (civil, familia, laboral, penal), destino de los ítems del rail. */
 	dimensions: {
 		id: string;
 		label: string;
@@ -69,7 +68,6 @@ interface SiteContent {
 		lede: string;
 		items: {
 			id: string;
-			icon: 'contract' | 'family' | 'briefcase';
 			title: string;
 			desc: string;
 			list: string[];
@@ -177,11 +175,11 @@ export const content: Record<Locale, SiteContent> = {
 			rail: {
 				aria: 'Dimensiones del derecho',
 				items: [
-					{ icon: 'building', label: 'Derecho administrativo', href: '#administrativo' },
-					{ icon: 'contract', label: 'Derecho civil', href: '#civil' },
-					{ icon: 'family', label: 'Derecho de familia', href: '#familia' },
-					{ icon: 'briefcase', label: 'Derecho laboral', href: '#laboral' },
-					{ icon: 'scale', label: 'Derecho penal', href: '#penal' },
+					{ label: 'Derecho administrativo', href: '#administrativo' },
+					{ label: 'Derecho civil', href: '#civil' },
+					{ label: 'Derecho de familia', href: '#familia' },
+					{ label: 'Derecho laboral', href: '#laboral' },
+					{ label: 'Derecho penal', href: '#penal' },
 				],
 			},
 		},
@@ -213,17 +211,6 @@ export const content: Record<Locale, SiteContent> = {
 						'Recursos de amparo frente a órdenes de expulsión y abandono',
 					],
 				},
-				{
-					id: 'penal',
-					num: 'iii.',
-					/* Punteo y bajada pendientes: Tamara enviará el texto para Derecho penal. */
-					title: 'Derecho penal',
-					desc: 'Defensa de personas migrantes en situación de vulnerabilidad, con enfoque de derechos humanos.',
-					list: [
-						'Trata de personas, violencia de género, niñez y adolescencia migrante',
-						'Litigio estratégico y asesoría a organizaciones',
-					],
-				},
 			],
 		},
 		dimensions: {
@@ -234,7 +221,6 @@ export const content: Record<Locale, SiteContent> = {
 			items: [
 				{
 					id: 'civil',
-					icon: 'contract',
 					title: 'Derecho civil',
 					desc: 'Asesoría y representación en las relaciones jurídicas entre particulares.',
 					list: [
@@ -245,7 +231,6 @@ export const content: Record<Locale, SiteContent> = {
 				},
 				{
 					id: 'familia',
-					icon: 'family',
 					title: 'Derecho de familia',
 					desc: 'Acompañamiento cercano en los asuntos que tocan la vida familiar, también cuando cruzan fronteras.',
 					list: [
@@ -256,13 +241,22 @@ export const content: Record<Locale, SiteContent> = {
 				},
 				{
 					id: 'laboral',
-					icon: 'briefcase',
 					title: 'Derecho laboral',
 					desc: 'Defensa de los derechos del trabajador y asesoría a quienes contratan personas extranjeras.',
 					list: [
 						'Despido injustificado y autodespido',
 						'Tutela de derechos fundamentales del trabajador',
 						'Contratación de personas extranjeras y cumplimiento laboral',
+					],
+				},
+				{
+					id: 'penal',
+					/* Punteo y bajada pendientes: Tamara enviará el texto para Derecho penal. */
+					title: 'Derecho penal',
+					desc: 'Defensa de personas migrantes en situación de vulnerabilidad, con enfoque de derechos humanos.',
+					list: [
+						'Trata de personas, violencia de género, niñez y adolescencia migrante',
+						'Litigio estratégico y asesoría a organizaciones',
 					],
 				},
 			],
@@ -346,10 +340,10 @@ export const content: Record<Locale, SiteContent> = {
 				areaOptions: [
 					{ value: 'administrativo', label: 'Procedimientos administrativos' },
 					{ value: 'judicial', label: 'Defensa judicial migratoria' },
-					{ value: 'penal', label: 'Derecho penal' },
 					{ value: 'civil', label: 'Derecho civil' },
 					{ value: 'familia', label: 'Derecho de familia' },
 					{ value: 'laboral', label: 'Derecho laboral' },
+					{ value: 'penal', label: 'Derecho penal' },
 					{ value: 'empresas', label: 'Empresas e instituciones' },
 					{ value: 'otro', label: 'Otro / No estoy seguro' },
 				],
@@ -444,11 +438,11 @@ export const content: Record<Locale, SiteContent> = {
 			rail: {
 				aria: 'Dimensions of the law',
 				items: [
-					{ icon: 'building', label: 'Administrative law', href: '#administrative' },
-					{ icon: 'contract', label: 'Civil law', href: '#civil' },
-					{ icon: 'family', label: 'Family law', href: '#family' },
-					{ icon: 'briefcase', label: 'Labor law', href: '#labor' },
-					{ icon: 'scale', label: 'Criminal law', href: '#criminal' },
+					{ label: 'Administrative law', href: '#administrative' },
+					{ label: 'Civil law', href: '#civil' },
+					{ label: 'Family law', href: '#family' },
+					{ label: 'Labor law', href: '#labor' },
+					{ label: 'Criminal law', href: '#criminal' },
 				],
 			},
 		},
@@ -480,17 +474,6 @@ export const content: Record<Locale, SiteContent> = {
 						'Amparo writs against deportation and departure orders',
 					],
 				},
-				{
-					id: 'criminal',
-					num: 'iii.',
-					/* Bajada y punteo pendientes: Tamara enviará el texto para Derecho penal. */
-					title: 'Criminal law',
-					desc: 'Defense of migrants in vulnerable situations, with a human-rights focus.',
-					list: [
-						'Human trafficking, gender-based violence, migrant children and adolescents',
-						'Strategic litigation and counsel to organizations',
-					],
-				},
 			],
 		},
 		dimensions: {
@@ -501,7 +484,6 @@ export const content: Record<Locale, SiteContent> = {
 			items: [
 				{
 					id: 'civil',
-					icon: 'contract',
 					title: 'Civil law',
 					desc: 'Counsel and representation in legal matters between private parties.',
 					list: [
@@ -512,7 +494,6 @@ export const content: Record<Locale, SiteContent> = {
 				},
 				{
 					id: 'family',
-					icon: 'family',
 					title: 'Family law',
 					desc: 'Close guidance through the matters that touch family life, including across borders.',
 					list: [
@@ -523,13 +504,22 @@ export const content: Record<Locale, SiteContent> = {
 				},
 				{
 					id: 'labor',
-					icon: 'briefcase',
 					title: 'Labor law',
 					desc: 'Defense of workers’ rights and counsel for those who hire foreign nationals.',
 					list: [
 						'Unjustified dismissal and constructive dismissal',
 						'Protection of fundamental rights at work',
 						'Hiring foreign workers and labor compliance',
+					],
+				},
+				{
+					id: 'criminal',
+					/* Bajada y punteo pendientes: Tamara enviará el texto para Derecho penal. */
+					title: 'Criminal law',
+					desc: 'Defense of migrants in vulnerable situations, with a human-rights focus.',
+					list: [
+						'Human trafficking, gender-based violence, migrant children and adolescents',
+						'Strategic litigation and counsel to organizations',
 					],
 				},
 			],
@@ -613,10 +603,10 @@ export const content: Record<Locale, SiteContent> = {
 				areaOptions: [
 					{ value: 'administrative', label: 'Administrative proceedings' },
 					{ value: 'judicial', label: 'Judicial immigration defense' },
-					{ value: 'criminal', label: 'Criminal law' },
 					{ value: 'civil', label: 'Civil law' },
 					{ value: 'family', label: 'Family law' },
 					{ value: 'labor', label: 'Labor law' },
+					{ value: 'criminal', label: 'Criminal law' },
 					{ value: 'business', label: 'Companies & institutions' },
 					{ value: 'other', label: 'Other / Not sure' },
 				],

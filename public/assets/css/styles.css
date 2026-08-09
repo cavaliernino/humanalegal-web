@@ -479,9 +479,11 @@ p { margin: 0 0 1em; }
 
 /* ---------- Tarjeta unificada (áreas y otras áreas) ----------
    Borde tinta, transparente → crema al hover, con leve elevación. */
+/* 2 columnas: Áreas de práctica queda con sus 2 troncales anchas
+   y Otras áreas forma una cuadrícula 2×2 (civil, familia, laboral, penal). */
 .areas__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
 }
 .area {
