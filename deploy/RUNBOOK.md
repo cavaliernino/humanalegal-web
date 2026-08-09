@@ -173,10 +173,28 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ## Re-deploy de contenido (después de editar el sitio)
 
+**Vía principal: GitHub Actions.** `git push origin main` reconstruye y despliega
+solo (workflow `Build & Deploy`, ~1-2 min). No requiere nada más.
+
+**Fallback manual (solo si Actions está caído).** OJO: el usuario `deploy` de CI
+es el dueño de `/var/www/humanalegal.cl`; un `sudo rsync -a` pelado preserva el
+dueño de origen (nino) y **rompe los deploys de Actions siguientes** con
+`Permission denied` (pasó el 8-ago-2026). Usar siempre `--chown`:
+
 ```bash
 # En el Mac (repo tamaralopez-web):
 npm run build
-rsync -az --delete -e 'ssh -o BatchMode=yes' dist/ fuego:deploy/humanalegal.cl/
+rsync -az --delete --exclude='.DS_Store' -e 'ssh -o BatchMode=yes' dist/ fuego:deploy/humanalegal.cl/
 # En fuego:
-sudo rsync -a --delete ~/deploy/humanalegal.cl/ /var/www/humanalegal.cl/
+sudo rsync -a --delete --chown=deploy:deploy ~/deploy/humanalegal.cl/ /var/www/humanalegal.cl/
 ```
+
+**Si Actions falla con `Permission denied` / `failed to set times`** (dueño
+pisado por un deploy manual antiguo), restaurar en fuego:
+
+```bash
+sudo chown -R deploy:deploy /var/www/humanalegal.cl
+sudo find /var/www/humanalegal.cl -name .DS_Store -delete
+```
+
+y relanzar el workflow (*Actions → Build & Deploy → Re-run* o un push nuevo).
