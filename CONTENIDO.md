@@ -29,11 +29,25 @@ draft: true              # true = NO se publica (solo se ve en desarrollo)
 
 ## 2. Publicar un artículo, paso a paso
 
-1. Crear el archivo en la carpeta del idioma (`es/` o `en/`).
+Hay dos caminos. **El deploy es automático en ambos**: cualquier commit en `main`
+dispara GitHub Actions, que reconstruye y publica en 1-2 minutos. El sitemap y el
+RSS se actualizan solos; nadie tiene que tocar el servidor.
+
+### Camino A — Tamara desde el navegador (recomendado)
+
+1. Entrar a `https://www.humanalegal.cl/admin/` → *Iniciar sesión con GitHub*.
+2. *Blog · Español* (o *English*) → **New**, o abrir un borrador existente.
+3. Escribir, subir imágenes, completar fecha y etiquetas.
+4. **Borrador activado** = no se publica todavía. **Desactivado** = se publica.
+5. **Save/Publish**: el CMS commitea a `main` y el sitio se actualiza solo.
+
+### Camino B — desde el repo (Nino, o cuando el borrador lo redacta Claude)
+
+1. Crear el archivo en la carpeta del idioma (`src/content/blog/es/` o `en/`).
 2. Llenar el frontmatter y escribir el cuerpo en Markdown (`##` para subtítulos, `**negrita**`, listas con `-`, enlaces `[texto](url)`).
 3. Previsualizar: `npm run dev` y abrir `http://localhost:4321/blog/`. **En desarrollo se ven también los drafts.**
 4. Cuando Tamara lo apruebe, poner `draft: false`.
-5. `npm run build` y desplegar (subir `dist/` al servidor). El sitemap y el RSS se actualizan solos.
+5. `git add`, `git commit` y `git push origin main`. Listo — Actions hace el resto.
 
 ## 3. Guardarraíles (importante, es el sitio de una abogada)
 
@@ -53,7 +67,7 @@ La meta es **un artículo por semana**. Receta repetible:
 
 3. **Tamara revisa**: corrige lo jurídico, resuelve los `[VERIFICAR: …]`, ajusta el tono.
 4. (Opcional) **Traducción**: "Traduce este artículo al inglés en `src/content/blog/en/` con el mismo `translationKey`."
-5. Quitar `draft`, build y deploy.
+5. Quitar `draft` y push a `main` (o desactivar el borrador desde el CMS).
 
 Sugerencia de ritmo sostenible: que Claude deje **2-3 borradores adelantados** en la carpeta como `draft: true`; así Tamara revisa cuando puede y siempre hay cola publicable.
 
