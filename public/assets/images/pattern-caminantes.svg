@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500">
+  <!--
+    Marca de agua del hero: gente caminando, toda en la misma dirección.
+    Es un patrón (no una foto) a propósito: sin perspectiva ni punto de fuga,
+    la densidad queda pareja y constante a cualquier ancho de pantalla, y el
+    mosaico se repite sin costuras. El color va sólido; la opacidad se aplica
+    en CSS sobre la capa completa, así los trazos superpuestos no se oscurecen.
+    Proporciones: cabeza ~1/7 del alto y brazos pegados al cuerpo, para que
+    lean como personas y no como pictogramas de señalética.
+  -->
+  <defs>
+    <g id="a" fill="none" stroke="#7a2f2f" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="20" cy="5.6" r="3.4" fill="#7a2f2f" stroke="none"/>
+      <path d="M20 9.6 L20 26" stroke-width="7.4"/>
+      <path d="M20 26 L23.6 35.5 L25.4 44" stroke-width="4.8"/>
+      <path d="M20 26 L16.2 35.5 L14.6 44" stroke-width="4.8"/>
+      <path d="M20.6 13.5 L23.4 23.5" stroke-width="3.2"/>
+      <path d="M19.4 13.5 L17 23" stroke-width="3.2"/>
+    </g>
+    <!-- zancada algo más larga -->
+    <g id="b" fill="none" stroke="#7a2f2f" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="20" cy="5.6" r="3.4" fill="#7a2f2f" stroke="none"/>
+      <path d="M20 9.6 L19.6 26" stroke-width="7.4"/>
+      <path d="M19.6 26 L25 34.5 L28 43.5" stroke-width="4.8"/>
+      <path d="M19.6 26 L14.4 35 L12.2 43.5" stroke-width="4.8"/>
+      <path d="M20.4 13.5 L24.2 22.5" stroke-width="3.2"/>
+      <path d="M19.2 13.5 L15.6 23" stroke-width="3.2"/>
+    </g>
+    <!-- con bolso al hombro -->
+    <g id="c" fill="none" stroke="#7a2f2f" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="20" cy="5.6" r="3.4" fill="#7a2f2f" stroke="none"/>
+      <path d="M20 9.6 L20 26" stroke-width="7.4"/>
+      <path d="M20 26 L23 35.5 L24.6 44" stroke-width="4.8"/>
+      <path d="M20 26 L17 35.5 L15.6 44" stroke-width="4.8"/>
+      <path d="M20.6 13.5 L23 23.5" stroke-width="3.2"/>
+      <path d="M19.4 13.5 L16.6 22" stroke-width="3.2"/>
+      <path d="M16.2 21.5 L14.4 26.5" stroke-width="5.4"/>
+    </g>
+    <!-- paso corto -->
+    <g id="d" fill="none" stroke="#7a2f2f" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="20" cy="5.6" r="3.4" fill="#7a2f2f" stroke="none"/>
+      <path d="M20 9.6 L20.2 26" stroke-width="7.4"/>
+      <path d="M20.2 26 L22.2 35.5 L23.4 44" stroke-width="4.8"/>
+      <path d="M20.2 26 L18 35.5 L16.8 44" stroke-width="4.8"/>
+      <path d="M20.8 13.5 L22.8 23.5" stroke-width="3.2"/>
+      <path d="M19.6 13.5 L17.6 23.5" stroke-width="3.2"/>
+    </g>
+  </defs>
+
+  <g>
+    <use href="#a" transform="translate(30 38) scale(1)"/>
+    <use href="#c" transform="translate(152 62) scale(0.86)"/>
+    <use href="#b" transform="translate(268 34) scale(1.08)"/>
+    <use href="#d" transform="translate(404 66) scale(0.9)"/>
+    <use href="#a" transform="translate(534 42) scale(1.02)"/>
+    <use href="#c" transform="translate(664 70) scale(0.88)"/>
+
+    <use href="#b" transform="translate(74 196) scale(1.1)"/>
+    <use href="#d" transform="translate(206 170) scale(0.92)"/>
+    <use href="#c" transform="translate(340 208) scale(1)"/>
+    <use href="#a" transform="translate(468 176) scale(0.86)"/>
+    <use href="#b" transform="translate(598 202) scale(1.06)"/>
+    <use href="#d" transform="translate(710 182) scale(0.9)"/>
+
+    <use href="#c" transform="translate(24 348) scale(0.9)"/>
+    <use href="#a" transform="translate(166 322) scale(1.04)"/>
+    <use href="#d" transform="translate(300 360) scale(0.88)"/>
+    <use href="#b" transform="translate(428 330) scale(1.1)"/>
+    <use href="#a" transform="translate(566 356) scale(0.94)"/>
+    <use href="#c" transform="translate(694 328) scale(1)"/>
+  </g>
+</svg>
