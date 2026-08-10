@@ -416,6 +416,15 @@ p { margin: 0 0 1em; }
   animation: fadeUp 900ms var(--ease) 550ms both;
   display: flex;
   flex-direction: column;
+  /* Claro suave que apaga la marca de agua bajo el índice: el fondo de esta
+     zona del hero está entre cream y bone, así que el velo usa un tono
+     intermedio y se desvanece antes del borde para no dejar un halo visible. */
+  background: radial-gradient(
+    ellipse 78% 66% at 50% 50%,
+    rgba(250, 246, 238, 0.97) 0%,
+    rgba(250, 246, 238, 0.8) 46%,
+    rgba(250, 246, 238, 0) 75%
+  );
 }
 .hero__rail ul {
   flex: 1;
@@ -463,14 +472,14 @@ p { margin: 0 0 1em; }
 .hero__rail-num {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--clay);
   min-width: 1.5em;
 }
 .hero__rail-label {
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 1.45;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.4;
   transition: color var(--dur) var(--ease);
 }
 
